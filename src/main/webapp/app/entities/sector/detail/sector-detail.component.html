@@ -1,0 +1,46 @@
+<div class="row justify-content-center" style="text-align: right">
+  <div class="col-8">
+    <div *ngIf="sector">
+      <h2 data-cy="sectorDetailsHeading"><span>القطاع</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ر.م</span></dt>
+        <dd>
+          <span>{{ sector.id }}</span>
+        </dd>
+        <dt><span>اسم القطاع</span></dt>
+        <dd>
+          <span>{{ sector.name }}</span>
+        </dd>
+        <dt><span>الهاتف</span></dt>
+        <dd>
+          <span>{{ sector.phone }}</span>
+        </dd>
+        <dt><span>العنوان</span></dt>
+        <dd>
+          <span>{{ sector.address }}</span>
+        </dd>
+        <dt><span>القطاع التابع له</span></dt>
+        <dd>
+          <div *ngIf="sector.sector">
+            <a [routerLink]="['/sector', sector.sector?.id, 'view']">{{ sector.sector?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sector', sector.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

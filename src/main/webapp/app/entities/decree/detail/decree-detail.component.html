@@ -1,0 +1,92 @@
+<div class="row justify-content-center" style="text-align: right">
+  <div class="col-8">
+    <div *ngIf="decree">
+      <h2 data-cy="decreeDetailsHeading"><span>القرارات</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ر.م</span></dt>
+        <dd>
+          <span>{{ decree.id }}</span>
+        </dd>
+        <dt><span>رقم القرار</span></dt>
+        <dd>
+          <span>{{ decree.decreenum }}</span>
+        </dd>
+        <dt><span>السنة</span></dt>
+        <dd>
+          <span>{{ decree.decreeyear }}</span>
+        </dd>
+        <dt><span>الغرض</span></dt>
+        <dd>
+          <span>{{ decree.purpose }}</span>
+        </dd>
+        <dt><span>النوع</span></dt>
+        <dd>
+          <span>{{ decree.dectype }}</span>
+        </dd>
+        <dt><span>عدد الايام</span></dt>
+        <dd>
+          <span>{{ decree.daynum }}</span>
+        </dd>
+        <dt><span>المدينة</span></dt>
+        <dd>
+          <span>{{ decree.city }}</span>
+        </dd>
+        <dt><span>البلد</span></dt>
+        <dd>
+          <span>{{ decree.countrty }}</span>
+        </dd>
+        <dt><span>الجهة المرشحة</span></dt>
+        <dd>
+          <span>{{ decree.sponsor }}</span>
+        </dd>
+        <dt><span>الجهة المانحة</span></dt>
+        <dd>
+          <span>{{ decree.proponent }}</span>
+        </dd>
+        <dt><span>تاريخ البداية</span></dt>
+        <dd>
+          <span>{{ decree.startDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span>تاريخ النهاية </span></dt>
+        <dd>
+          <span>{{ decree.endDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span>المستند</span></dt>
+        <dd>
+          <div *ngIf="decree.image">
+            <a (click)="openFile(decree.image, decree.imageContentType)">open</a>
+            {{ decree.imageContentType }}, {{ byteSize(decree.image) }}
+          </div>
+        </dd>
+        <dt><span>اسماء الموظفين</span></dt>
+        <dd>
+          <span *ngFor="let employee of decree.employees; let last = last">
+            <a [routerLink]="['/employee', employee?.id, 'view']">{{ employee.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>صادر من</span></dt>
+        <dd>
+          <div *ngIf="decree.decreeissue">
+            <a [routerLink]="['/decree-issue', decree.decreeissue?.id, 'view']">{{ decree.decreeissue?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span>
+      </button>
+
+      <button type="button" [routerLink]="['/decree', decree.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

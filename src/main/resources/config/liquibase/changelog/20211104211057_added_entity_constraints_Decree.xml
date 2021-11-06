@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <!--
+        Added the constraints for entity Decree.
+    -->
+    <changeSet id="20211104211057-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="decree_id"
+                                 baseTableName="rel_decree__employee"
+                                 constraintName="fk_rel_decree__employee__decree_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="decree"/>
+
+        <addForeignKeyConstraint baseColumnNames="employee_id"
+                                 baseTableName="rel_decree__employee"
+                                 constraintName="fk_rel_decree__employee__employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="decreeissue_id"
+                                 baseTableName="decree"
+                                 constraintName="fk_decree__decreeissue_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="decree_issue"/>
+    </changeSet>
+</databaseChangeLog>

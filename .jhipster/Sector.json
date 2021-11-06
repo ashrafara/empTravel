@@ -1,0 +1,50 @@
+{
+  "name": "Sector",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "employee",
+      "otherEntityRelationshipName": "sector",
+      "relationshipName": "employee",
+      "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "sector",
+      "otherEntityRelationshipName": "sector",
+      "relationshipName": "parent"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "sector",
+      "otherEntityRelationshipName": "parent",
+      "relationshipName": "sector",
+      "otherEntityField": "name"
+    }
+  ],
+  "entityTableName": "sector",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211104211056"
+}

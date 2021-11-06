@@ -1,0 +1,63 @@
+<div class="row justify-content-center" style="text-align: right">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-sector-heading" data-cy="SectorCreateUpdateHeading">إنشاء قطاع</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ر.م</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_name">اسم القطاع</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_phone">رقم الهاتف</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_address">العنوان</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_sector">القطاع التابع له</label>
+          <select class="form-control" id="field_sector" data-cy="sector" name="sector" formControlName="sector">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="sectorOption.id === editForm.get('sector')!.value?.id ? editForm.get('sector')!.value : sectorOption"
+              *ngFor="let sectorOption of sectorsSharedCollection; trackBy: trackSectorById"
+            >
+              {{ sectorOption.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>إلغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,117 @@
+<div style="text-align: right">
+  <h2 id="page-heading" data-cy="DecreeHeading">
+    <span>القرارات</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>تهيئة</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-decree"
+        [routerLink]="['/decree/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> اضافة </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="decrees?.length === 0" style="text-align: right">
+    <span>No decrees found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="decrees && decrees.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span>ر.م</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="decreenum"><span>رقم القرار</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="decreeyear"><span>السنة </span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="purpose"><span>الغرض</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dectype"><span>نوع القرار</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="daynum"><span>عدد الايام</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="city"><span>المدينة</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="countrty"><span>البلد</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="sponsor"><span>الجهة المرشحة </span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="proponent"><span>الجهة الداعمة</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="startDate"><span>تاريخ البداية</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="endDate"><span>تاريخ النهاية</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="image"><span>صوة القرار</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="decreeissue.name"><span>الجهة الصادرة</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let decree of decrees; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/decree', decree.id, 'view']">{{ decree.id }}</a>
+          </td>
+          <td>{{ decree.decreenum }}</td>
+          <td>{{ decree.decreeyear }}</td>
+          <td>{{ decree.purpose }}</td>
+          <td>{{ decree.dectype }}</td>
+          <td>{{ decree.daynum }}</td>
+          <td>{{ decree.city }}</td>
+          <td>{{ decree.countrty }}</td>
+          <td>{{ decree.sponsor }}</td>
+          <td>{{ decree.proponent }}</td>
+          <td>{{ decree.startDate | formatMediumDate }}</td>
+          <td>{{ decree.endDate | formatMediumDate }}</td>
+          <td>
+            <a *ngIf="decree.image" (click)="openFile(decree.image, decree.imageContentType)">open</a>
+            <span *ngIf="decree.image">{{ decree.imageContentType }}, {{ byteSize(decree.image) }}</span>
+          </td>
+          <td>
+            <div *ngIf="decree.decreeissue">
+              <a [routerLink]="['/decree-issue', decree.decreeissue?.id, 'view']">{{ decree.decreeissue?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/decree', decree.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">عرض</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/decree', decree.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">تعديل</span>
+              </button>
+
+              <button type="submit" (click)="delete(decree)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">حذف</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="decrees && decrees.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

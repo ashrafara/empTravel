@@ -1,0 +1,205 @@
+<div class="row justify-content-center" style="text-align: right">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-decree-heading" data-cy="DecreeCreateUpdateHeading">تعديل</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ر.م</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_decreenum">رقم القرار</label>
+          <input type="number" class="form-control" name="decreenum" id="field_decreenum" data-cy="decreenum" formControlName="decreenum" />
+          <div *ngIf="editForm.get('decreenum')!.invalid && (editForm.get('decreenum')!.dirty || editForm.get('decreenum')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('decreenum')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('decreenum')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_decreeyear">السنة</label>
+          <input
+            type="number"
+            class="form-control"
+            name="decreeyear"
+            id="field_decreeyear"
+            data-cy="decreeyear"
+            formControlName="decreeyear"
+          />
+          <div *ngIf="editForm.get('decreeyear')!.invalid && (editForm.get('decreeyear')!.dirty || editForm.get('decreeyear')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('decreeyear')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('decreeyear')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_purpose">الغرض</label>
+          <input type="text" class="form-control" name="purpose" id="field_purpose" data-cy="purpose" formControlName="purpose" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dectype">النوع</label>
+          <select class="form-control" name="dectype" formControlName="dectype" id="field_dectype" data-cy="dectype">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let decType of decTypeValues" [value]="decType">decType</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_daynum">عدد الايام</label>
+          <input type="number" class="form-control" name="daynum" id="field_daynum" data-cy="daynum" formControlName="daynum" />
+          <div *ngIf="editForm.get('daynum')!.invalid && (editForm.get('daynum')!.dirty || editForm.get('daynum')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('daynum')?.errors?.required"> هذه الخانة مطلوبة. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('daynum')?.errors?.number"> يجب ان تكون رقم. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_city">المدينة</label>
+          <input type="text" class="form-control" name="city" id="field_city" data-cy="city" formControlName="city" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_countrty">البلد</label>
+          <input type="text" class="form-control" name="countrty" id="field_countrty" data-cy="countrty" formControlName="countrty" />
+          <div *ngIf="editForm.get('countrty')!.invalid && (editForm.get('countrty')!.dirty || editForm.get('countrty')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('countrty')?.errors?.required"> يجب تعبئة الخانة. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_sponsor">الجهة المرشحة</label>
+          <input type="text" class="form-control" name="sponsor" id="field_sponsor" data-cy="sponsor" formControlName="sponsor" />
+          <div *ngIf="editForm.get('sponsor')!.invalid && (editForm.get('sponsor')!.dirty || editForm.get('sponsor')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('sponsor')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_proponent">الجهة الداعمة</label>
+          <input type="text" class="form-control" name="proponent" id="field_proponent" data-cy="proponent" formControlName="proponent" />
+          <div *ngIf="editForm.get('proponent')!.invalid && (editForm.get('proponent')!.dirty || editForm.get('proponent')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('proponent')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_startDate"> تاريخ البداية</label>
+          <div class="input-group">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="text"
+              class="form-control"
+              name="startDate"
+              ngbDatepicker
+              #startDateDp="ngbDatepicker"
+              formControlName="startDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_endDate"> تاريخ النهاية</label>
+          <div class="input-group">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="text"
+              class="form-control"
+              name="endDate"
+              ngbDatepicker
+              #endDateDp="ngbDatepicker"
+              formControlName="endDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_image">المستند</label>
+          <div>
+            <div *ngIf="editForm.get('image')!.value" class="form-text text-danger clearfix">
+              <a class="pull-left" (click)="openFile(editForm.get('image')!.value, editForm.get('imageContentType')!.value)">open</a><br />
+              <span class="pull-left">{{ editForm.get('imageContentType')!.value }}, {{ byteSize(editForm.get('image')!.value) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ image: null }); editForm.patchValue({ imageContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_image" data-cy="image" (change)="setFileData($event, 'image', false)" />
+          </div>
+          <input type="hidden" class="form-control" name="image" id="field_image" data-cy="image" formControlName="image" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="imageContentType"
+            id="field_imageContentType"
+            formControlName="imageContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="field_employees">الموظفين</label>
+          <select class="form-control" id="field_employees" data-cy="employee" multiple name="employees" formControlName="employees">
+            <option
+              [ngValue]="getSelectedEmployee(employeeOption, editForm.get('employees')!.value)"
+              *ngFor="let employeeOption of employeesSharedCollection; trackBy: trackEmployeeById"
+            >
+              {{ employeeOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_decreeissue">صادر من</label>
+          <select class="form-control" id="field_decreeissue" data-cy="decreeissue" name="decreeissue" formControlName="decreeissue">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                decreeIssueOption.id === editForm.get('decreeissue')!.value?.id ? editForm.get('decreeissue')!.value : decreeIssueOption
+              "
+              *ngFor="let decreeIssueOption of decreeIssuesSharedCollection; trackBy: trackDecreeIssueById"
+            >
+              {{ decreeIssueOption.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>حذف</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

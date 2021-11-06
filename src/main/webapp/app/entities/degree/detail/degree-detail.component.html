@@ -1,0 +1,36 @@
+<div class="row justify-content-center" style="text-align: right">
+  <div class="col-8">
+    <div *ngIf="degree">
+      <h2 data-cy="degreeDetailsHeading"><span>الدرجة الوظيفة</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ر.م</span></dt>
+        <dd>
+          <span>{{ degree.id }}</span>
+        </dd>
+        <dt><span>اسم الدرجة</span></dt>
+        <dd>
+          <span>{{ degree.name }}</span>
+        </dd>
+        <dt><span>رقم الدرجة</span></dt>
+        <dd>
+          <span>{{ degree.number }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span>
+      </button>
+
+      <button type="button" [routerLink]="['/degree', degree.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

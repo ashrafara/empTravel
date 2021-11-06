@@ -1,0 +1,56 @@
+<div class="row justify-content-center" style="text-align: right">
+  <div class="col-8">
+    <div *ngIf="employee">
+      <h2 data-cy="employeeDetailsHeading"><span>الموظف</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ر.م</span></dt>
+        <dd>
+          <span>{{ employee.id }}</span>
+        </dd>
+        <dt><span>اسم الموظف</span></dt>
+        <dd>
+          <span>{{ employee.name }}</span>
+        </dd>
+        <dt><span>الوظيفة</span></dt>
+        <dd>
+          <span>{{ employee.jobposition }}</span>
+        </dd>
+        <dt><span>رقم الهاتف</span></dt>
+        <dd>
+          <span>{{ employee.phone }}</span>
+        </dd>
+        <dt><span>الادارة</span></dt>
+        <dd>
+          <span>{{ employee.departement }}</span>
+        </dd>
+        <dt><span>القطاع التابع له</span></dt>
+        <dd>
+          <div *ngIf="employee.sector">
+            <a [routerLink]="['/sector', employee.sector?.id, 'view']">{{ employee.sector?.name }}</a>
+          </div>
+        </dd>
+        <dt><span>الدرجة الوظيفية</span></dt>
+        <dd>
+          <div *ngIf="employee.degree">
+            <a [routerLink]="['/degree', employee.degree?.id, 'view']">{{ employee.degree?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span>
+      </button>
+
+      <button type="button" [routerLink]="['/employee', employee.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

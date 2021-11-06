@@ -1,0 +1,88 @@
+<div style="text-align: right">
+  <h2 id="page-heading" data-cy="DegreeHeading">
+    <span>الدرجة الوظيفية</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span> تهيئة</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-degree"
+        [routerLink]="['/degree/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> اضافة </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="degrees?.length === 0">
+    <span>لا توجد الدرجة الوظيفة</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="degrees && degrees.length > 0" style="text-align: right">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span>ر.م</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name"><span>اسم الدرجة</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="number"><span>رقم الدرجة</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let degree of degrees; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/degree', degree.id, 'view']">{{ degree.id }}</a>
+          </td>
+          <td>{{ degree.name }}</td>
+          <td>{{ degree.number }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/degree', degree.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">عرض</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/degree', degree.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">تعديل</span>
+              </button>
+
+              <button type="submit" (click)="delete(degree)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">حذف</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="degrees && degrees.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
