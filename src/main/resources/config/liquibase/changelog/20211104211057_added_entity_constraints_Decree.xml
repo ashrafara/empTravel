@@ -25,5 +25,17 @@
                                  constraintName="fk_decree__decreeissue_id"
                                  referencedColumnNames="id"
                                  referencedTableName="decree_issue"/>
+
+        <addForeignKeyConstraint baseColumnNames="sponsor_id"
+                                 baseTableName="decree"
+                                 constraintName="fk_decree__sponsor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="decree_issue"/>
+
+        <addForeignKeyConstraint baseColumnNames="proponent_id"
+                                 baseTableName="decree"
+                                 constraintName="fk_decree__proponent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="decree_issue"/>
     </changeSet>
 </databaseChangeLog>

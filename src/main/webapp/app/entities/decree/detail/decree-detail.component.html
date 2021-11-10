@@ -26,7 +26,7 @@
         <dd>
           <span>{{ decree.purpose }}</span>
         </dd>
-        <dt><span>النوع</span></dt>
+        <dt><span>نوع</span></dt>
         <dd>
           <span>{{ decree.dectype }}</span>
         </dd>
@@ -34,7 +34,7 @@
         <dd>
           <span>{{ decree.daynum }}</span>
         </dd>
-        <dt><span>المدينة</span></dt>
+        <dt><span>ملاحظات</span></dt>
         <dd>
           <span>{{ decree.city }}</span>
         </dd>
@@ -42,40 +42,44 @@
         <dd>
           <span>{{ decree.countrty }}</span>
         </dd>
-        <dt><span>الجهة المرشحة</span></dt>
-        <dd>
-          <span>{{ decree.sponsor }}</span>
-        </dd>
-        <dt><span>الجهة المانحة</span></dt>
-        <dd>
-          <span>{{ decree.proponent }}</span>
-        </dd>
         <dt><span>تاريخ البداية</span></dt>
         <dd>
           <span>{{ decree.startDate | formatMediumDate }}</span>
         </dd>
-        <dt><span>تاريخ النهاية </span></dt>
+        <dt><span>تاريخ النهاية</span></dt>
         <dd>
           <span>{{ decree.endDate | formatMediumDate }}</span>
         </dd>
-        <dt><span>المستند</span></dt>
+        <dt><span>الصورة</span></dt>
         <dd>
           <div *ngIf="decree.image">
             <a (click)="openFile(decree.image, decree.imageContentType)">open</a>
             {{ decree.imageContentType }}, {{ byteSize(decree.image) }}
           </div>
         </dd>
-        <dt><span>اسماء الموظفين</span></dt>
+        <dt><span>اسم الموظف</span></dt>
         <dd>
           <span *ngFor="let employee of decree.employees; let last = last">
             <a [routerLink]="['/employee', employee?.id, 'view']">{{ employee.name }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
-        <dt><span>صادر من</span></dt>
+        <dt><span>الجهة الصادرة</span></dt>
         <dd>
           <div *ngIf="decree.decreeissue">
             <a [routerLink]="['/decree-issue', decree.decreeissue?.id, 'view']">{{ decree.decreeissue?.name }}</a>
+          </div>
+        </dd>
+        <dt><span>الجهة المموله</span></dt>
+        <dd>
+          <div *ngIf="decree.sponsor">
+            <a [routerLink]="['/decree-issue', decree.sponsor?.id, 'view']">{{ decree.sponsor?.name }}</a>
+          </div>
+        </dd>
+        <dt><span>الجهة المرشحة</span></dt>
+        <dd>
+          <div *ngIf="decree.proponent">
+            <a [routerLink]="['/decree-issue', decree.proponent?.id, 'view']">{{ decree.proponent?.name }}</a>
           </div>
         </dd>
       </dl>

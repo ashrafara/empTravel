@@ -35,12 +35,6 @@
             <column name="countrty" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="sponsor" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-            <column name="proponent" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
             <column name="start_date" type="date">
                 <constraints nullable="true" />
             </column>
@@ -54,6 +48,12 @@
                 <constraints nullable="true" />
             </column>
             <column name="decreeissue_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="sponsor_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="proponent_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -98,8 +98,6 @@
             <column name="daynum" type="numeric"/>
             <column name="city" type="string"/>
             <column name="countrty" type="string"/>
-            <column name="sponsor" type="string"/>
-            <column name="proponent" type="string"/>
             <column name="start_date" type="date"/>
             <column name="end_date" type="date"/>
             <column name="image" type="blob"/>

@@ -1,5 +1,5 @@
 <div style="text-align: right">
-  <h2 id="page-heading" data-cy="DecreeHeading">
+  <h1 id="page-heading" data-cy="DecreeHeading">
     <span>القرارات</span>
 
     <div class="d-flex justify-content-end">
@@ -18,14 +18,14 @@
         <span> اضافة </span>
       </button>
     </div>
-  </h2>
+  </h1>
 
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="decrees?.length === 0" style="text-align: right">
-    <span>No decrees found</span>
+  <div class="alert alert-warning" id="no-result" *ngIf="decrees?.length === 0">
+    <span>القرار غير موجود</span>
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="decrees && decrees.length > 0">
@@ -34,18 +34,18 @@
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
           <th scope="col" jhiSortBy="id"><span>ر.م</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="decreenum"><span>رقم القرار</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="decreeyear"><span>السنة </span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="decreeyear"><span>السنة</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="purpose"><span>الغرض</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="dectype"><span>نوع القرار</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dectype"><span>النوع</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="daynum"><span>عدد الايام</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="city"><span>المدينة</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="city"><span>ملاحظات</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="countrty"><span>البلد</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="sponsor"><span>الجهة المرشحة </span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="proponent"><span>الجهة الداعمة</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="startDate"><span>تاريخ البداية</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="endDate"><span>تاريخ النهاية</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="image"><span>صوة القرار</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="decreeissue.name"><span>الجهة الصادرة</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="startDate"><span> تاريخ البداية</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="endDate"><span> تاريخ النهاية</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="image"><span>صورة</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="decreeissue.name"><span>الجهة المصدرة للقرار</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="sponsor.name"><span>الجهة المموله</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="proponent.name"><span>الجهة المرشحة</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -61,17 +61,25 @@
           <td>{{ decree.daynum }}</td>
           <td>{{ decree.city }}</td>
           <td>{{ decree.countrty }}</td>
-          <td>{{ decree.sponsor }}</td>
-          <td>{{ decree.proponent }}</td>
           <td>{{ decree.startDate | formatMediumDate }}</td>
           <td>{{ decree.endDate | formatMediumDate }}</td>
           <td>
-            <a *ngIf="decree.image" (click)="openFile(decree.image, decree.imageContentType)">open</a>
+            <a *ngIf="decree.image" (click)="openFile(decree.image, decree.imageContentType)">فتح</a>
             <span *ngIf="decree.image">{{ decree.imageContentType }}, {{ byteSize(decree.image) }}</span>
           </td>
           <td>
             <div *ngIf="decree.decreeissue">
               <a [routerLink]="['/decree-issue', decree.decreeissue?.id, 'view']">{{ decree.decreeissue?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="decree.sponsor">
+              <a [routerLink]="['/decree-issue', decree.sponsor?.id, 'view']">{{ decree.sponsor?.name }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="decree.proponent">
+              <a [routerLink]="['/decree-issue', decree.proponent?.id, 'view']">{{ decree.proponent?.name }}</a>
             </div>
           </td>
           <td class="text-right">

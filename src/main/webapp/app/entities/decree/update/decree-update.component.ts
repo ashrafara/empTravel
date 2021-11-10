@@ -36,14 +36,14 @@ export class DecreeUpdateComponent implements OnInit {
     daynum: [null, [Validators.required]],
     city: [],
     countrty: [null, [Validators.required]],
-    sponsor: [null, [Validators.required]],
-    proponent: [null, [Validators.required]],
     startDate: [],
     endDate: [],
     image: [],
     imageContentType: [],
     employees: [],
     decreeissue: [],
+    sponsor: [],
+    proponent: [],
   });
 
   constructor(
@@ -141,14 +141,14 @@ export class DecreeUpdateComponent implements OnInit {
       daynum: decree.daynum,
       city: decree.city,
       countrty: decree.countrty,
-      sponsor: decree.sponsor,
-      proponent: decree.proponent,
       startDate: decree.startDate,
       endDate: decree.endDate,
       image: decree.image,
       imageContentType: decree.imageContentType,
       employees: decree.employees,
       decreeissue: decree.decreeissue,
+      sponsor: decree.sponsor,
+      proponent: decree.proponent,
     });
 
     this.employeesSharedCollection = this.employeeService.addEmployeeToCollectionIfMissing(
@@ -157,13 +157,15 @@ export class DecreeUpdateComponent implements OnInit {
     );
     this.decreeIssuesSharedCollection = this.decreeIssueService.addDecreeIssueToCollectionIfMissing(
       this.decreeIssuesSharedCollection,
-      decree.decreeissue
+      decree.decreeissue,
+      decree.sponsor,
+      decree.proponent
     );
   }
 
   protected loadRelationshipsOptions(): void {
     this.employeeService
-      .query()
+      .query({ size: 100 })
       .pipe(map((res: HttpResponse<IEmployee[]>) => res.body ?? []))
       .pipe(
         map((employees: IEmployee[]) =>
@@ -173,11 +175,16 @@ export class DecreeUpdateComponent implements OnInit {
       .subscribe((employees: IEmployee[]) => (this.employeesSharedCollection = employees));
 
     this.decreeIssueService
-      .query()
+      .query({ size: 100 })
       .pipe(map((res: HttpResponse<IDecreeIssue[]>) => res.body ?? []))
       .pipe(
         map((decreeIssues: IDecreeIssue[]) =>
-          this.decreeIssueService.addDecreeIssueToCollectionIfMissing(decreeIssues, this.editForm.get('decreeissue')!.value)
+          this.decreeIssueService.addDecreeIssueToCollectionIfMissing(
+            decreeIssues,
+            this.editForm.get('decreeissue')!.value,
+            this.editForm.get('sponsor')!.value,
+            this.editForm.get('proponent')!.value
+          )
         )
       )
       .subscribe((decreeIssues: IDecreeIssue[]) => (this.decreeIssuesSharedCollection = decreeIssues));
@@ -194,14 +201,14 @@ export class DecreeUpdateComponent implements OnInit {
       daynum: this.editForm.get(['daynum'])!.value,
       city: this.editForm.get(['city'])!.value,
       countrty: this.editForm.get(['countrty'])!.value,
-      sponsor: this.editForm.get(['sponsor'])!.value,
-      proponent: this.editForm.get(['proponent'])!.value,
       startDate: this.editForm.get(['startDate'])!.value,
       endDate: this.editForm.get(['endDate'])!.value,
       imageContentType: this.editForm.get(['imageContentType'])!.value,
       image: this.editForm.get(['image'])!.value,
       employees: this.editForm.get(['employees'])!.value,
       decreeissue: this.editForm.get(['decreeissue'])!.value,
+      sponsor: this.editForm.get(['sponsor'])!.value,
+      proponent: this.editForm.get(['proponent'])!.value,
     };
   }
 }

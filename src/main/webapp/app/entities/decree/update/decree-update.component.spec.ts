@@ -66,10 +66,14 @@ describe('Decree Management Update Component', () => {
       const decree: IDecree = { id: 456 };
       const decreeissue: IDecreeIssue = { id: 19851 };
       decree.decreeissue = decreeissue;
+      const sponsor: IDecreeIssue = { id: 89023 };
+      decree.sponsor = sponsor;
+      const proponent: IDecreeIssue = { id: 6754 };
+      decree.proponent = proponent;
 
-      const decreeIssueCollection: IDecreeIssue[] = [{ id: 89023 }];
+      const decreeIssueCollection: IDecreeIssue[] = [{ id: 22545 }];
       jest.spyOn(decreeIssueService, 'query').mockReturnValue(of(new HttpResponse({ body: decreeIssueCollection })));
-      const additionalDecreeIssues = [decreeissue];
+      const additionalDecreeIssues = [decreeissue, sponsor, proponent];
       const expectedCollection: IDecreeIssue[] = [...additionalDecreeIssues, ...decreeIssueCollection];
       jest.spyOn(decreeIssueService, 'addDecreeIssueToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -85,8 +89,12 @@ describe('Decree Management Update Component', () => {
       const decree: IDecree = { id: 456 };
       const employees: IEmployee = { id: 39020 };
       decree.employees = [employees];
-      const decreeissue: IDecreeIssue = { id: 6754 };
+      const decreeissue: IDecreeIssue = { id: 48950 };
       decree.decreeissue = decreeissue;
+      const sponsor: IDecreeIssue = { id: 84029 };
+      decree.sponsor = sponsor;
+      const proponent: IDecreeIssue = { id: 6925 };
+      decree.proponent = proponent;
 
       activatedRoute.data = of({ decree });
       comp.ngOnInit();
@@ -94,6 +102,8 @@ describe('Decree Management Update Component', () => {
       expect(comp.editForm.value).toEqual(expect.objectContaining(decree));
       expect(comp.employeesSharedCollection).toContain(employees);
       expect(comp.decreeIssuesSharedCollection).toContain(decreeissue);
+      expect(comp.decreeIssuesSharedCollection).toContain(sponsor);
+      expect(comp.decreeIssuesSharedCollection).toContain(proponent);
     });
   });
 

@@ -24,7 +24,7 @@ public class DecreeIssue implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "decreeissue")
-    @JsonIgnoreProperties(value = { "employees", "decreeissue" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "employees", "decreeissue", "sponsor", "proponent" }, allowSetters = true)
     private Set<Decree> decreees = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

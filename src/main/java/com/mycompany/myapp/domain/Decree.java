@@ -49,14 +49,6 @@ public class Decree implements Serializable {
     @Column(name = "countrty", nullable = false)
     private String countrty;
 
-    @NotNull
-    @Column(name = "sponsor", nullable = false)
-    private String sponsor;
-
-    @NotNull
-    @Column(name = "proponent", nullable = false)
-    private String proponent;
-
     @Column(name = "start_date")
     private LocalDate startDate;
 
@@ -82,6 +74,14 @@ public class Decree implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "decreees" }, allowSetters = true)
     private DecreeIssue decreeissue;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "decreees" }, allowSetters = true)
+    private DecreeIssue sponsor;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "decreees" }, allowSetters = true)
+    private DecreeIssue proponent;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -189,32 +189,6 @@ public class Decree implements Serializable {
         this.countrty = countrty;
     }
 
-    public String getSponsor() {
-        return this.sponsor;
-    }
-
-    public Decree sponsor(String sponsor) {
-        this.setSponsor(sponsor);
-        return this;
-    }
-
-    public void setSponsor(String sponsor) {
-        this.sponsor = sponsor;
-    }
-
-    public String getProponent() {
-        return this.proponent;
-    }
-
-    public Decree proponent(String proponent) {
-        this.setProponent(proponent);
-        return this;
-    }
-
-    public void setProponent(String proponent) {
-        this.proponent = proponent;
-    }
-
     public LocalDate getStartDate() {
         return this.startDate;
     }
@@ -305,6 +279,32 @@ public class Decree implements Serializable {
         return this;
     }
 
+    public DecreeIssue getSponsor() {
+        return this.sponsor;
+    }
+
+    public void setSponsor(DecreeIssue decreeIssue) {
+        this.sponsor = decreeIssue;
+    }
+
+    public Decree sponsor(DecreeIssue decreeIssue) {
+        this.setSponsor(decreeIssue);
+        return this;
+    }
+
+    public DecreeIssue getProponent() {
+        return this.proponent;
+    }
+
+    public void setProponent(DecreeIssue decreeIssue) {
+        this.proponent = decreeIssue;
+    }
+
+    public Decree proponent(DecreeIssue decreeIssue) {
+        this.setProponent(decreeIssue);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -336,8 +336,6 @@ public class Decree implements Serializable {
             ", daynum=" + getDaynum() +
             ", city='" + getCity() + "'" +
             ", countrty='" + getCountrty() + "'" +
-            ", sponsor='" + getSponsor() + "'" +
-            ", proponent='" + getProponent() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
             ", image='" + getImage() + "'" +

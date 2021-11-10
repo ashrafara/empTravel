@@ -32,84 +32,126 @@
         </a>
       </li>
       <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-      <li
-        *ngSwitchCase="true"
-        ngbDropdown
-        class="nav-item dropdown pointer"
-        display="dynamic"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="employee" (click)="collapseNavbar()">
           <span>
-            <fa-icon icon="th-list"></fa-icon>
-            <span>قوائم المهام</span>
+            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+            <span>الموظف</span>
           </span>
         </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="employee"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span>الموظف</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="sector"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span>القطاعات</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="decree"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span>القرارات</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="decree-issue"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span>الجهات المصدره للقرار</span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="dropdown-item"
-              routerLink="degree"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (click)="collapseNavbar()"
-            >
-              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-              <span>الدرجة الوظيفية</span>
-            </a>
-          </li>
-          <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-        </ul>
       </li>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="sector" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+            <span>القطاعات</span>
+          </span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="decree" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+            <span>القرارات</span>
+          </span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="decree-issue" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+            <span>الجهات المصدره</span>
+          </span>
+        </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link" routerLink="degree" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+            <span> الدرجة الوظيفية</span>
+          </span>
+        </a>
+      </li>
+
+      <!--      <li-->
+      <!--        *ngSwitchCase="true"-->
+      <!--        ngbDropdown-->
+      <!--        class="nav-item dropdown pointer"-->
+      <!--        display="dynamic"-->
+      <!--        routerLinkActive="active"-->
+      <!--        [routerLinkActiveOptions]="{ exact: true }"-->
+      <!--      >-->
+      <!--        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">-->
+      <!--          <span>-->
+      <!--            <fa-icon icon="th-list"></fa-icon>-->
+      <!--            <span>قوائم المهام</span>-->
+      <!--          </span>-->
+      <!--        </a>-->
+
+      <!--        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">-->
+      <!--          <li>-->
+      <!--            <a-->
+      <!--              class="dropdown-item"-->
+      <!--              routerLink="employee"-->
+      <!--              routerLinkActive="active"-->
+      <!--              [routerLinkActiveOptions]="{ exact: true }"-->
+      <!--              (click)="collapseNavbar()"-->
+      <!--            >-->
+      <!--              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>-->
+      <!--              <span>الموظف</span>-->
+      <!--            </a>-->
+      <!--          </li>-->
+      <!--          <li>-->
+      <!--            <a-->
+      <!--              class="dropdown-item"-->
+      <!--              routerLink="sector"-->
+      <!--              routerLinkActive="active"-->
+      <!--              [routerLinkActiveOptions]="{ exact: true }"-->
+      <!--              (click)="collapseNavbar()"-->
+      <!--            >-->
+      <!--              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>-->
+      <!--              <span>القطاعات</span>-->
+      <!--            </a>-->
+      <!--          </li>-->
+      <!--          <li>-->
+      <!--            <a-->
+      <!--              class="dropdown-item"-->
+      <!--              routerLink="decree"-->
+      <!--              routerLinkActive="active"-->
+      <!--              [routerLinkActiveOptions]="{ exact: true }"-->
+      <!--              (click)="collapseNavbar()"-->
+      <!--            >-->
+      <!--              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>-->
+      <!--              <span>القرارات</span>-->
+      <!--            </a>-->
+      <!--          </li>-->
+      <!--          <li>-->
+      <!--            <a-->
+      <!--              class="dropdown-item"-->
+      <!--              routerLink="decree-issue"-->
+      <!--              routerLinkActive="active"-->
+      <!--              [routerLinkActiveOptions]="{ exact: true }"-->
+      <!--              (click)="collapseNavbar()"-->
+      <!--            >-->
+      <!--              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>-->
+      <!--              <span>الجهات المصدره للقرار</span>-->
+      <!--            </a>-->
+      <!--          </li>-->
+      <!--          <li>-->
+      <!--            <a-->
+      <!--              class="dropdown-item"-->
+      <!--              routerLink="degree"-->
+      <!--              routerLinkActive="active"-->
+      <!--              [routerLinkActiveOptions]="{ exact: true }"-->
+      <!--              (click)="collapseNavbar()"-->
+      <!--            >-->
+      <!--              <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>-->
+      <!--              <span>الدرجة الوظيفية</span>-->
+      <!--            </a>-->
+      <!--          </li>-->
+      <!--          &lt;!&ndash; jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here &ndash;&gt;-->
+      <!--        </ul>-->
+      <!--      </li>-->
       <li
         *jhiHasAnyAuthority="'ROLE_ADMIN'"
         ngbDropdown

@@ -33,8 +33,6 @@ describe('Decree Service', () => {
       daynum: 0,
       city: 'AAAAAAA',
       countrty: 'AAAAAAA',
-      sponsor: 'AAAAAAA',
-      proponent: 'AAAAAAA',
       startDate: currentDate,
       endDate: currentDate,
       imageContentType: 'image/png',
@@ -95,8 +93,6 @@ describe('Decree Service', () => {
           daynum: 1,
           city: 'BBBBBB',
           countrty: 'BBBBBB',
-          sponsor: 'BBBBBB',
-          proponent: 'BBBBBB',
           startDate: currentDate.format(DATE_FORMAT),
           endDate: currentDate.format(DATE_FORMAT),
           image: 'BBBBBB',
@@ -125,8 +121,6 @@ describe('Decree Service', () => {
           purpose: 'BBBBBB',
           dectype: 'BBBBBB',
           city: 'BBBBBB',
-          sponsor: 'BBBBBB',
-          proponent: 'BBBBBB',
           startDate: currentDate.format(DATE_FORMAT),
           endDate: currentDate.format(DATE_FORMAT),
           image: 'BBBBBB',
@@ -162,8 +156,6 @@ describe('Decree Service', () => {
           daynum: 1,
           city: 'BBBBBB',
           countrty: 'BBBBBB',
-          sponsor: 'BBBBBB',
-          proponent: 'BBBBBB',
           startDate: currentDate.format(DATE_FORMAT),
           endDate: currentDate.format(DATE_FORMAT),
           image: 'BBBBBB',
@@ -224,7 +216,7 @@ describe('Decree Service', () => {
       });
 
       it('should add only unique Decree to an array', () => {
-        const decreeArray: IDecree[] = [{ id: 123 }, { id: 456 }, { id: 37686 }];
+        const decreeArray: IDecree[] = [{ id: 123 }, { id: 456 }, { id: 80213 }];
         const decreeCollection: IDecree[] = [{ id: 123 }];
         expectedResult = service.addDecreeToCollectionIfMissing(decreeCollection, ...decreeArray);
         expect(expectedResult).toHaveLength(3);

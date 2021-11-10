@@ -12,14 +12,14 @@ export interface IDecree {
   daynum?: number;
   city?: string | null;
   countrty?: string;
-  sponsor?: string;
-  proponent?: string;
   startDate?: dayjs.Dayjs | null;
   endDate?: dayjs.Dayjs | null;
   imageContentType?: string | null;
   image?: string | null;
   employees?: IEmployee[] | null;
   decreeissue?: IDecreeIssue | null;
+  sponsor?: IDecreeIssue | null;
+  proponent?: IDecreeIssue | null;
 }
 
 export class Decree implements IDecree {
@@ -32,14 +32,14 @@ export class Decree implements IDecree {
     public daynum?: number,
     public city?: string | null,
     public countrty?: string,
-    public sponsor?: string,
-    public proponent?: string,
     public startDate?: dayjs.Dayjs | null,
     public endDate?: dayjs.Dayjs | null,
     public imageContentType?: string | null,
     public image?: string | null,
     public employees?: IEmployee[] | null,
-    public decreeissue?: IDecreeIssue | null
+    public decreeissue?: IDecreeIssue | null,
+    public sponsor?: IDecreeIssue | null,
+    public proponent?: IDecreeIssue | null
   ) {}
 }
 
