@@ -143,7 +143,15 @@
 
         <div class="form-group">
           <label for="field_employees">Employee</label>
-          <select class="form-control" id="field_employees" data-cy="employee" multiple name="employees" formControlName="employees">
+          <select
+            class="form-control"
+            size="20"
+            id="field_employees"
+            data-cy="employee"
+            multiple
+            name="employees"
+            formControlName="employees"
+          >
             <option
               [ngValue]="getSelectedEmployee(employeeOption, editForm.get('employees')!.value)"
               *ngFor="let employeeOption of employeesSharedCollection; trackBy: trackEmployeeById"

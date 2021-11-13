@@ -106,13 +106,13 @@ export class EmployeeUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.sectorService
-      .query({ size: 100 })
+      .query({ size: 5000 })
       .pipe(map((res: HttpResponse<ISector[]>) => res.body ?? []))
       .pipe(map((sectors: ISector[]) => this.sectorService.addSectorToCollectionIfMissing(sectors, this.editForm.get('sector')!.value)))
       .subscribe((sectors: ISector[]) => (this.sectorsSharedCollection = sectors));
 
     this.degreeService
-      .query({ size: 100 })
+      .query({ size: 5000 })
       .pipe(map((res: HttpResponse<IDegree[]>) => res.body ?? []))
       .pipe(map((degrees: IDegree[]) => this.degreeService.addDegreeToCollectionIfMissing(degrees, this.editForm.get('degree')!.value)))
       .subscribe((degrees: IDegree[]) => (this.degreesSharedCollection = degrees));

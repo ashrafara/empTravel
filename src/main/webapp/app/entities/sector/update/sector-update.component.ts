@@ -86,7 +86,7 @@ export class SectorUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.sectorService
-      .query()
+      .query({ size: 5000 })
       .pipe(map((res: HttpResponse<ISector[]>) => res.body ?? []))
       .pipe(map((sectors: ISector[]) => this.sectorService.addSectorToCollectionIfMissing(sectors, this.editForm.get('sector')!.value)))
       .subscribe((sectors: ISector[]) => (this.sectorsSharedCollection = sectors));

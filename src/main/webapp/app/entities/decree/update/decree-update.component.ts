@@ -165,7 +165,7 @@ export class DecreeUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.employeeService
-      .query({ size: 100 })
+      .query({ size: 5000 })
       .pipe(map((res: HttpResponse<IEmployee[]>) => res.body ?? []))
       .pipe(
         map((employees: IEmployee[]) =>
@@ -175,7 +175,7 @@ export class DecreeUpdateComponent implements OnInit {
       .subscribe((employees: IEmployee[]) => (this.employeesSharedCollection = employees));
 
     this.decreeIssueService
-      .query({ size: 100 })
+      .query({ size: 5000 })
       .pipe(map((res: HttpResponse<IDecreeIssue[]>) => res.body ?? []))
       .pipe(
         map((decreeIssues: IDecreeIssue[]) =>
