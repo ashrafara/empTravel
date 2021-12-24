@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+    <fontFamily name="Cairo">
+        <normal>
+            <ttf><![CDATA[fonts/Cairo/Cairo-Regular.ttf]]></ttf>
+        </normal>
+        <bold>
+            <ttf><![CDATA[fonts/Cairo/Cairo-Bold.ttf]]></ttf>
+        </bold>
+        <pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+        <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+        <exportFonts/>
+    </fontFamily>
+    <fontFamily name="Times New Roman">
+        <normal><![CDATA[fonts/TimesNewRoman/Times_New_Roman.ttf]]></normal>
+        <bold><![CDATA[fonts/TimesNewRoman/timesbd.ttf]]></bold>
+        <italic><![CDATA[fonts/TimesNewRoman/Times_New_Roman_Italic.ttf]]></italic>
+        <boldItalic><![CDATA[fonts/TimesNewRoman/timesbi.ttf]]></boldItalic>
+        <pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+        <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+        <exportFonts/>
+    </fontFamily>
+    <fontFamily name="Droid">
+        <normal>
+            <ttf><![CDATA[fonts/Droid/DroidKufi-Regular.ttf]]></ttf>
+        </normal>
+        <bold>
+            <ttf><![CDATA[fonts/Droid/DroidKufi-Bold.ttf]]></ttf>
+        </bold>
+        <pdfEncoding><![CDATA[Identity-H]]></pdfEncoding>
+        <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
+        <exportFonts/>
+    </fontFamily>
+</fontFamilies>

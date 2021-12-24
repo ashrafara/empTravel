@@ -1,7 +1,8 @@
 package com.mycompany.myapp.config;
 
-import com.mycompany.myapp.security.*;
-import com.mycompany.myapp.security.jwt.*;
+import com.mycompany.myapp.security.AuthoritiesConstants;
+import com.mycompany.myapp.security.jwt.JWTConfigurer;
+import com.mycompany.myapp.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
@@ -75,16 +76,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .contentSecurityPolicy(jHipsterProperties.getSecurity().getContentSecurityPolicy())
         .and()
             .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
-        .and()
+            .and()
             .permissionsPolicy().policy("camera=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), sync-xhr=()")
-        .and()
+            .and()
             .frameOptions()
             .deny()
-        .and()
+            .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
+            .and()
             .authorizeRequests()
+            .antMatchers("/api/public/**").permitAll()
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/activate").permitAll()

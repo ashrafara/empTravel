@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="employee" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20" uuid="fa4bb6cd-cc3c-4f35-ad34-f314b08033ee">
+    <property name="com.jaspersoft.studio.data.sql.tables">
+        <![CDATA[c2VjdG9yICwxNzMsMTUsZWY5MTYwNjktMTVjZS00MTUxLWJhZGItZWU5OWY4MDQxMDA1O2BFbW9s
+b3llYCAsODksMTUsYTc3YTU3OGUtOGNlMy00MmFlLWJjYzMtNmY5NGEyMTk1MmUwO2RlZ3JlZSAs
+MTUsMTUsM2VkOWNiNzctZTQ0Ny00MzA2LWExMzgtOWU0ZTQ4NTU1ZDQxOw==]]>
+    </property>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+    <queryString language="SQL">
+        <![CDATA[SELECT employee.id, employee.name,employee.jobposition,sector.name
+FROM `employee` right JOIN
+sector ON employee.id= sector.id]]>
+    </queryString>
+    <field name="id" class="java.lang.Long">
+        <property name="com.jaspersoft.studio.field.name" value="id"/>
+        <property name="com.jaspersoft.studio.field.label" value="id"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+    </field>
+    <field name="name" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="name"/>
+        <property name="com.jaspersoft.studio.field.label" value="name"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+    </field>
+    <field name="jobposition" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="jobposition"/>
+        <property name="com.jaspersoft.studio.field.label" value="jobposition"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+    </field>
+    <field name="COLUMN_4" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="name"/>
+        <property name="com.jaspersoft.studio.field.label" value="name"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="sector"/>
+    </field>
+    <group name="id">
+        <groupExpression><![CDATA[$F{id}]]></groupExpression>
+    </group>
+    <group name="name">
+        <groupExpression><![CDATA[$F{name}]]></groupExpression>
+    </group>
+    <group name="jobposition">
+        <groupExpression><![CDATA[$F{jobposition}]]></groupExpression>
+    </group>
+    <group name="COLUMN_4">
+        <groupExpression><![CDATA[$F{COLUMN_4}]]></groupExpression>
+    </group>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="79" splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band height="35" splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="36" splitType="Stretch">
+            <staticText>
+                <reportElement x="490" y="0" width="70" height="30" uuid="fd2fc905-2862-4829-b589-992f1324564b">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="47fa9c3b-f214-46ee-aae4-c11efdab067f"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[id]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="338" y="0" width="142" height="30" uuid="c56a8a6d-776c-4013-97b7-c7f8ffbfd149">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="3b9d6af2-3348-4324-99e5-465ea37b06e8"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="220" y="0" width="100" height="30" uuid="c4773f62-b583-48f4-80e2-74de4839ab4d">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="2d58769a-4d45-486f-851d-49d38949d751"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[jobposition]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="110" y="0" width="100" height="30" uuid="9696d580-1e3c-4a9a-b1de-70809a93c3ec">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="abe92196-715c-4851-b14c-915bf29eb81d"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[jobposition]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="0" width="100" height="30" uuid="ec17201a-a526-41b1-a00a-3547a5f30ae8">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="2544ce32-abf9-480a-99eb-f38fc9f69eb2"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[name]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="42" splitType="Stretch">
+            <textField>
+                <reportElement x="490" y="10" width="70" height="30" uuid="0076d3c1-c15a-4874-b9c4-035ff86bdb53">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="47fa9c3b-f214-46ee-aae4-c11efdab067f"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="330" y="10" width="150" height="30" uuid="514c9544-fa3a-4832-a779-4114f3d160cc">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="3b9d6af2-3348-4324-99e5-465ea37b06e8"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="220" y="10" width="100" height="30" uuid="adf9e259-6572-4a02-8f02-b9437732bad9">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="2d58769a-4d45-486f-851d-49d38949d751"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{jobposition}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="110" y="10" width="100" height="30" uuid="80302c61-3bdd-4be2-a0ce-76659a6a5c85">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="abe92196-715c-4851-b14c-915bf29eb81d"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{jobposition}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="10" width="100" height="30" uuid="36f5615e-3595-4e52-b985-7e7f0ea0e900">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="2544ce32-abf9-480a-99eb-f38fc9f69eb2"/>
+                </reportElement>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{COLUMN_4}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="45" splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="54" splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="42" splitType="Stretch"/>
+    </summary>
+</jasperReport>

@@ -142,23 +142,20 @@
         </div>
 
         <div class="form-group">
-          <label for="field_employees">Employee</label>
-          <select
-            class="form-control"
-            size="20"
-            id="field_employees"
-            data-cy="employee"
-            multiple
-            name="employees"
-            formControlName="employees"
+          <label>الموظفين</label>
+
+          <ngx-select
+            [allowClear]="true"
+            [formControl]="selectControl"
+            [multiple]="true"
+            [items]="employeesSharedCollection"
+            (select)="doSelectionChanges($event)"
+            id="employees"
+            optionTextField="name"
+            placeholder="قم باختيار ..."
+            required
           >
-            <option
-              [ngValue]="getSelectedEmployee(employeeOption, editForm.get('employees')!.value)"
-              *ngFor="let employeeOption of employeesSharedCollection; trackBy: trackEmployeeById"
-            >
-              {{ employeeOption.name }}
-            </option>
-          </select>
+          </ngx-select>
         </div>
 
         <div class="form-group">
@@ -177,7 +174,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_sponsor">الجهة الممولة</label>
+          <label class="form-control-label" for="field_sponsor">الجهة الممــولة</label>
           <select class="form-control" id="field_sponsor" data-cy="sponsor" name="sponsor" formControlName="sponsor">
             <option [ngValue]="null"></option>
             <option
@@ -193,6 +190,8 @@
           <label class="form-control-label" for="field_proponent">الجهة المرشحة</label>
           <select class="form-control" id="field_proponent" data-cy="proponent" name="proponent" formControlName="proponent">
             <option [ngValue]="null"></option>
+            Angular Data Grid: Set Filter - Overview
+
             <option
               [ngValue]="
                 decreeIssueOption.id === editForm.get('proponent')!.value?.id ? editForm.get('proponent')!.value : decreeIssueOption

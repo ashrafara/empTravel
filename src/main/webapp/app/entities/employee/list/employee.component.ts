@@ -23,6 +23,7 @@ export class EmployeeComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  currentSearch: any;
 
   constructor(
     protected employeeService: EmployeeService,
@@ -70,6 +71,31 @@ export class EmployeeComponent implements OnInit {
         this.loadPage();
       }
     });
+  }
+
+  printReport(): void {
+    const url = '/api/public/employees/print/';
+    window.open(url, '_blank');
+  }
+
+  search(currentSearch: any): void {
+    this.employeeService
+      .query({
+        'employeeName.contains': currentSearch,
+        page: 0,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      })
+      .subscribe(
+        (res: HttpResponse<IEmployee[]>) => {
+          this.isLoading = false;
+          this.employees = res.body ?? [];
+        },
+        () => {
+          this.isLoading = false;
+          this.onError();
+        }
+      );
   }
 
   protected sort(): string[] {

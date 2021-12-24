@@ -2,19 +2,19 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Employee;
 import com.mycompany.myapp.repository.EmployeeRepository;
+import com.mycompany.myapp.service.utl.JasperReportsUtil;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +39,9 @@ public class EmployeeResource {
     private String applicationName;
 
     private final EmployeeRepository employeeRepository;
+
+    @Autowired
+    JasperReportsUtil jasperReportsUtil;
 
     public EmployeeResource(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -193,5 +196,17 @@ public class EmployeeResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping(value = "/public/employees/print/", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<byte[]> printBusinessNameRequestPDF() {
+        log.debug("REST request to get report");
+        Map<String, Object> parameters = new HashMap<>();
+        byte[] fileBytes = jasperReportsUtil.getReportAsPDF(parameters, "employee");
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_PDF);
+        header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Name_" + System.currentTimeMillis() + ".pdf");
+        header.setContentLength(fileBytes.length);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(fileBytes), header);
     }
 }

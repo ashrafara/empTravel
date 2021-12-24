@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
-import { IDecree, Decree } from '../decree.model';
+import { Decree, IDecree } from '../decree.model';
 import { DecreeService } from '../service/decree.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
-import { IEmployee } from 'app/entities/employee/employee.model';
+import { Employee, IEmployee } from 'app/entities/employee/employee.model';
 import { EmployeeService } from 'app/entities/employee/service/employee.service';
 import { IDecreeIssue } from 'app/entities/decree-issue/decree-issue.model';
 import { DecreeIssueService } from 'app/entities/decree-issue/service/decree-issue.service';
@@ -23,6 +23,8 @@ import { DecType } from 'app/entities/enumerations/dec-type.model';
 export class DecreeUpdateComponent implements OnInit {
   isSaving = false;
   decTypeValues = Object.keys(DecType);
+  selectedEmployees: IEmployee[] = [];
+  selectControl = new FormControl();
 
   employeesSharedCollection: IEmployee[] = [];
   decreeIssuesSharedCollection: IDecreeIssue[] = [];
@@ -86,6 +88,7 @@ export class DecreeUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const decree = this.createFromForm();
+    decree.employees = this.selectedEmployees;
     if (decree.id !== undefined) {
       this.subscribeToSaveResponse(this.decreeService.update(decree));
     } else {
@@ -110,6 +113,15 @@ export class DecreeUpdateComponent implements OnInit {
       }
     }
     return option;
+  }
+
+  doSelectionChanges(employeeId: any): void {
+    const employee = new Employee();
+    employee.id = employeeId;
+
+    this.selectedEmployees.push(employee);
+    // eslint-disable-next-line no-console
+    console.log(this.selectedEmployees);
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDecree>>): void {

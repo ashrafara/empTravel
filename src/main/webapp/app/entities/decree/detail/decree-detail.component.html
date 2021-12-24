@@ -60,7 +60,7 @@
         <dt><span>اسم الموظف</span></dt>
         <dd>
           <span *ngFor="let employee of decree.employees; let last = last">
-            <a [routerLink]="['/employee', employee?.id, 'view']">{{ employee.name }}</a
+            <a [routerLink]="['/employee', employee?.name, 'view']">{{ employee.name }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
