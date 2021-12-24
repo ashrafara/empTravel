@@ -15,6 +15,7 @@ import { EmployeeService } from 'app/entities/employee/service/employee.service'
 import { IDecreeIssue } from 'app/entities/decree-issue/decree-issue.model';
 import { DecreeIssueService } from 'app/entities/decree-issue/service/decree-issue.service';
 import { DecType } from 'app/entities/enumerations/dec-type.model';
+import { INgxSelectOption } from 'ngx-select-ex';
 
 @Component({
   selector: 'jhi-decree-update',
@@ -115,13 +116,17 @@ export class DecreeUpdateComponent implements OnInit {
     return option;
   }
 
-  doSelectionChanges(employeeId: any): void {
-    const employee = new Employee();
-    employee.id = employeeId;
+  doSelectionChanges(ngxSelectOptions: INgxSelectOption[]): void {
+    this.selectedEmployees = [];
+    ngxSelectOptions.forEach(ngxSelectOption => {
+      const employee = new Employee();
+      employee.id = Number(ngxSelectOption.value);
+      // eslint-disable-next-line no-console
+      console.log(ngxSelectOption.value);
+      this.selectedEmployees.push(employee);
+    });
 
-    this.selectedEmployees.push(employee);
     // eslint-disable-next-line no-console
-    console.log(this.selectedEmployees);
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IDecree>>): void {

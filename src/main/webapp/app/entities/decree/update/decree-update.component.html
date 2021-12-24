@@ -149,9 +149,10 @@
             [formControl]="selectControl"
             [multiple]="true"
             [items]="employeesSharedCollection"
-            (select)="doSelectionChanges($event)"
+            (selectionChanges)="doSelectionChanges($event)"
             id="employees"
             optionTextField="name"
+            optionValueField="id"
             placeholder="قم باختيار ..."
             required
           >
