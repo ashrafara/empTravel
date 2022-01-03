@@ -32,20 +32,74 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span>ر.م</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="decreenum"><span>رقم القرار</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="decreeyear"><span>السنة</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="purpose"><span>الغرض</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="dectype"><span>النوع</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="daynum"><span>عدد الايام</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="city"><span>ملاحظات</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="countrty"><span>البلد</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="startDate"><span> تاريخ البداية</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="endDate"><span> تاريخ النهاية</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="image"><span>صورة</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="decreeissue.name"><span>الجهة المصدرة للقرار</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="sponsor.name"><span>الجهة المموله</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="proponent.name"><span>الجهة المرشحة</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="id">
+            <span>ر.م</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="decreenum">
+            <span>رقم القرار</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="decreeyear">
+            <span>السنة</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="purpose">
+            <span>الغرض</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dectype">
+            <span>النوع</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="daynum">
+            <span>عدد الايام</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="city">
+            <span>ملاحظات</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="countrty">
+            <span>البلد</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="decreenum">
+            <span>الساحة </span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="decreenum">
+            <span>التكلفة </span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="decreenum">
+            <span>قرار التكلفة </span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="startDate">
+            <span> تاريخ البداية</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="endDate">
+            <span> تاريخ النهاية</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="image">
+            <span>صورة</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="decreeissue.name">
+            <span>الجهة المصدرة للقرار</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sponsor.name">
+            <span>الجهة المموله</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="proponent.name">
+            <span>الجهة المرشحة</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -61,6 +115,9 @@
           <td>{{ decree.daynum }}</td>
           <td>{{ decree.city }}</td>
           <td>{{ decree.countrty }}</td>
+          <td>{{ decree.area }}</td>
+          <td>{{ decree.cost }}</td>
+          <td>{{ decree.decreecost }}</td>
           <td>{{ decree.startDate | formatMediumDate }}</td>
           <td>{{ decree.endDate | formatMediumDate }}</td>
           <td>

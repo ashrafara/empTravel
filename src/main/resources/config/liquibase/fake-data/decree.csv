@@ -1,11 +1,11 @@
-id;decreenum;decreeyear;purpose;dectype;daynum;city;countrty;start_date;end_date;image;image_content_type
-1;15907;62345;Automotive Engineer CSS;TRAINING;84718;East Odellburgh;client-driven Borders;2021-11-04;2021-11-04;../fake-data/blob/hipster.png;image/png
-2;18142;86143;website;TRAINING;81887;Madonnatown;National;2021-11-04;2021-11-04;../fake-data/blob/hipster.png;image/png
-3;58573;28811;Account Parkway;MISSION;62495;Council Bluffs;unleash;2021-11-04;2021-11-04;../fake-data/blob/hipster.png;image/png
-4;65489;34677;Investment Loan;WORK;24892;Hayleeside;compressing Electronics Assistant;2021-11-04;2021-11-04;../fake-data/blob/hipster.png;image/png
-5;55154;44873;mobile Analyst Metal;WORK;26093;Ashleighshire;primary;2021-11-04;2021-11-04;../fake-data/blob/hipster.png;image/png
-6;92807;64454;Operations;MISSION;54201;Camden;program firewall Specialist;2021-11-04;2021-11-04;../fake-data/blob/hipster.png;image/png
-7;77408;42431;Congo;WORK;70233;Rennerton;black;2021-11-04;2021-11-04;../fake-data/blob/hipster.png;image/png
-8;46208;87685;invoice Via;WORK;18471;Ortizview;Savings;2021-11-04;2021-11-03;../fake-data/blob/hipster.png;image/png
-9;12872;16570;Facilitator Chad;MISSION;57750;East Arnaldo;Research impactful;2021-11-04;2021-11-04;../fake-data/blob/hipster.png;image/png
-10;34467;43361;Representative;WORK;52730;Thomasmouth;administration;2021-11-04;2021-11-04;../fake-data/blob/hipster.png;image/png
+id;decreenum;decreeyear;purpose;dectype;daynum;city;countrty;start_date;end_date;area;cost;decreecost;image;image_content_type
+1;15907;62345;Automotive Engineer CSS;TRAINING;84718;East Odellburgh;client-driven Borders;2021-11-04;2021-11-04;HTTP;protocol North tertiary;Row;../fake-data/blob/hipster.png;image/png
+2;28811;45555;object-oriented Nebraska;WORK;99841;East Gino;red withdrawal Investment;2021-11-04;2021-11-03;Illinois functionalities;solution-oriented orange connecting;Jordan;../fake-data/blob/hipster.png;image/png
+3;28699;61595;Analyst Metal withdrawal;TRAINING;94920;Lake Andres;Mouse;2021-11-04;2021-11-04;Ethiopia Vietnam International;firewall Specialist quantify;Sleek system;../fake-data/blob/hipster.png;image/png
+4;63827;73084;Mouse;WORK;42154;Jakehaven;invoice Via;2021-11-04;2021-11-04;Kip Savings;Liaison;Facilitator Chad;../fake-data/blob/hipster.png;image/png
+5;66781;57750;Cloned;MISSION;13135;Gleasonport;Checking markets;2021-11-03;2021-11-04;Kiribati bypass;synthesize Common synthesizing;invoice Ergonomic Algerian;../fake-data/blob/hipster.png;image/png
+6;38123;27910;real-time;WORK;45443;Corwinport;Pizza Associate;2021-11-04;2021-11-04;withdrawal;ivory Handcrafted Plastic;indexing Wooden;../fake-data/blob/hipster.png;image/png
+7;3477;46509;Regional;TRAINING;58481;Port Molly;AGP bluetooth;2021-11-04;2021-11-04;Movies array;compelling;24/7 ability;../fake-data/blob/hipster.png;image/png
+8;18478;3956;Road infomediaries;WORK;88716;South Henritown;invoice EXE;2021-11-04;2021-11-03;payment bandwidth;Fantastic Unbranded;Analyst;../fake-data/blob/hipster.png;image/png
+9;30222;64994;Fantastic infrastructures Directives;TRAINING;25474;East Raleigh;Creative Bhutan;2021-11-04;2021-11-03;conglomeration;Communications Rubber Handmade;navigate Branding USB;../fake-data/blob/hipster.png;image/png
+10;97173;4614;Ville function;WORK;70465;Pine Bluff;quantify generating Shoes;2021-11-03;2021-11-04;orange;end-to-end;Licensed circuit Fish;../fake-data/blob/hipster.png;image/png

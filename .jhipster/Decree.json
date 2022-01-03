@@ -43,6 +43,18 @@
       "fieldType": "LocalDate"
     },
     {
+      "fieldName": "area",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cost",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "decreecost",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "image",
       "fieldType": "byte[]",
       "fieldTypeBlobContent": "any"

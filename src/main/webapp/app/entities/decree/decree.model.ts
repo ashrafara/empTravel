@@ -14,6 +14,9 @@ export interface IDecree {
   countrty?: string;
   startDate?: dayjs.Dayjs | null;
   endDate?: dayjs.Dayjs | null;
+  area?: string | null;
+  cost?: string | null;
+  decreecost?: string | null;
   imageContentType?: string | null;
   image?: string | null;
   employees?: IEmployee[] | null;
@@ -34,6 +37,9 @@ export class Decree implements IDecree {
     public countrty?: string,
     public startDate?: dayjs.Dayjs | null,
     public endDate?: dayjs.Dayjs | null,
+    public area?: string | null,
+    public cost?: string | null,
+    public decreecost?: string | null,
     public imageContentType?: string | null,
     public image?: string | null,
     public employees?: IEmployee[] | null,

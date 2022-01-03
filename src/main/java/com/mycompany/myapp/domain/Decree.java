@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * A Decree.
@@ -54,6 +54,15 @@ public class Decree implements Serializable {
 
     @Column(name = "end_date")
     private LocalDate endDate;
+
+    @Column(name = "area")
+    private String area;
+
+    @Column(name = "cost")
+    private String cost;
+
+    @Column(name = "decreecost")
+    private String decreecost;
 
     @Lob
     @Column(name = "image")
@@ -215,6 +224,45 @@ public class Decree implements Serializable {
         this.endDate = endDate;
     }
 
+    public String getArea() {
+        return this.area;
+    }
+
+    public Decree area(String area) {
+        this.setArea(area);
+        return this;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getCost() {
+        return this.cost;
+    }
+
+    public Decree cost(String cost) {
+        this.setCost(cost);
+        return this;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    public String getDecreecost() {
+        return this.decreecost;
+    }
+
+    public Decree decreecost(String decreecost) {
+        this.setDecreecost(decreecost);
+        return this;
+    }
+
+    public void setDecreecost(String decreecost) {
+        this.decreecost = decreecost;
+    }
+
     public byte[] getImage() {
         return this.image;
     }
@@ -338,6 +386,9 @@ public class Decree implements Serializable {
             ", countrty='" + getCountrty() + "'" +
             ", startDate='" + getStartDate() + "'" +
             ", endDate='" + getEndDate() + "'" +
+            ", area='" + getArea() + "'" +
+            ", cost='" + getCost() + "'" +
+            ", decreecost='" + getDecreecost() + "'" +
             ", image='" + getImage() + "'" +
             ", imageContentType='" + getImageContentType() + "'" +
             "}";
