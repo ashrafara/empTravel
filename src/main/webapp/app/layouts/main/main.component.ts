@@ -1,40 +1,77 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
+import { NavigationError, Router } from '@angular/router';
 
 import { AccountService } from 'app/core/auth/account.service';
+
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { LoginService } from '../../login/login.service';
 
 @Component({
   selector: 'jhi-main',
   templateUrl: './main.component.html',
+  styleUrls: ['./main.scss'],
 })
-export class MainComponent implements OnInit {
-  constructor(private accountService: AccountService, private titleService: Title, private router: Router) {}
+export class MainComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  @ViewChild(MatSidenav, { static: true })
+  sidenav!: MatSidenav;
+
+  constructor(
+    private accountService: AccountService,
+    private titleService: Title,
+    private router: Router,
+    private loginService: LoginService,
+    private observer: BreakpointObserver
+  ) {}
 
   ngOnInit(): void {
     // try to log in automatically
     this.accountService.identity().subscribe();
 
     this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.updateTitle();
+      if (event instanceof NavigationError && event.error.status === 404) {
+        this.router.navigate(['/404']);
       }
     });
   }
 
-  private getPageTitle(routeSnapshot: ActivatedRouteSnapshot): string {
-    const title: string = routeSnapshot.data['pageTitle'] ?? '';
-    if (routeSnapshot.firstChild) {
-      return this.getPageTitle(routeSnapshot.firstChild) || title;
+  ngAfterViewInit(): void {
+    this.observer.observe(['(max-width: 800px)']).subscribe(res => {
+      if (res.matches) {
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      } else {
+        this.sidenav.mode = 'side';
+        this.sidenav.open();
+      }
+    });
+
+    if (!this.accountService.isAuthenticated()) {
+      this.sidenav.close();
     }
-    return title;
   }
 
-  private updateTitle(): void {
-    let pageTitle = this.getPageTitle(this.router.routerState.snapshot.root);
-    if (!pageTitle) {
-      pageTitle = 'Emp Travel';
+  ngAfterViewChecked(): void {
+    if (!this.accountService.isAuthenticated()) {
+      this.sidenav.close();
     }
-    this.titleService.setTitle(pageTitle);
+  }
+
+  isAuthenticated(): boolean {
+    return this.accountService.isAuthenticated();
+  }
+
+  getFirstName(): any {
+    return this.isAuthenticated() ? this.accountService.getFirstName() : '';
+  }
+
+  login(): void {
+    this.router.navigate(['/login']);
+  }
+
+  logout(): void {
+    this.loginService.logout();
+    this.router.navigate(['']);
   }
 }

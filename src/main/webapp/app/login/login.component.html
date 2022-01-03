@@ -1,55 +1,73 @@
-<div>
-  <div class="row justify-content-center">
-    <div class="col-lg-6 col-md-8 col-sm-10">
-      <h1 data-cy="loginTitle">الدخول</h1>
-      <div class="alert alert-danger" *ngIf="authenticationError" data-cy="loginError">
-        <strong>Failed to sign in!</strong> Please check your credentials and try again.
+<div class="d-flex flex-row p-5 pb-5 m-5">
+  <div class="round-card align-self-center col-10 col-lg-5 col-md-8 mx-auto col-4 p-4 mat-elevation-z1 white-bg">
+    <div class="row align-items-center">
+      <div *ngIf="!authenticationError; else error" class="mt-3 col">
+        <h3>تسجيل الدخول</h3>
+        <p class="text-muted" matLine>الرجاء قم بإدخال بيانات حسابك للدخول.</p>
       </div>
-      <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
-        <div class="form-group">
-          <label class="username-label" for="username">الدخول</label>
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            id="username"
-            placeholder="Your username"
-            formControlName="username"
-            #username
-            data-cy="username"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="password">كلمة المرور</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            id="password"
-            placeholder="Your password"
-            formControlName="password"
-            data-cy="password"
-          />
-        </div>
-
-        <div class="form-check">
-          <label class="form-check-label" for="rememberMe">
-            <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
-            <span>Remember me</span>
-          </label>
-        </div>
-
-        <button type="submit" class="btn btn-primary" data-cy="submit">Sign in</button>
-      </form>
-      <div class="mt-3 alert alert-warning">
-        <a class="alert-link" routerLink="/account/reset/request" data-cy="forgetYourPasswordSelector">هل نسيت كلمة المرور؟</a>
-      </div>
-
-      <div class="alert alert-warning">
-        <span>انت غير مسجل فى المنظومة؟</span>
-        <a class="alert-link" routerLink="/account/register">تسجيل حساب جديد</a>
-      </div>
+      <ng-template #error>
+        <mat-error class="mt-3 col">
+          <strong>فشل في عملية تسجيل الدخول!</strong>
+          <p class="mt-1" matLine>يرجى التأكد من إسم المتسخدم و كلمة المرور.</p>
+        </mat-error>
+      </ng-template>
+      <img alt="logo" class="img-logo ml-3" src="../../content/images/logo.png" />
     </div>
+
+    <form (ngSubmit)="login()" [formGroup]="loginForm" class="mt-3" role="form">
+      <mat-form-field appearance="standard" class="fill">
+        <input
+          #username
+          formControlName="username"
+          id="username"
+          matInput
+          name="username"
+          placeholder="اسم المستخدم أو كلمة المرور"
+          required
+          type="text"
+        />
+        <mat-icon matSuffix>person</mat-icon>
+        <mat-error>إسم المستخدم لايمكن أن يكون فارغا</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="standard" class="fill mt-3">
+        <input formControlName="password" id="password" matInput name="password" placeholder="كلمة المرور" required type="password" />
+        <mat-icon matSuffix>vpn_key</mat-icon>
+        <mat-error>كلمة المرور لايمكن أن تكونة فارغة</mat-error>
+      </mat-form-field>
+
+      <!--            <div class="mt-2 text-center">-->
+      <!--                <re-captcha (resolved)="resolved($event)"-->
+      <!--                            siteKey="6LesvAIaAAAAAJsvY-hseiQrpMqYIRUsd81XxgOk"></re-captcha>-->
+      <!--            </div>-->
+
+      <div class="mt-2 text-center">
+        <button
+          [disabled]="!loginForm.get('username')!.value || !loginForm.get('password')!.value || isAuthenticating"
+          color="primary"
+          mat-raised-button
+          type="submit"
+        >
+          تسجـيل الدخــول
+        </button>
+      </div>
+      <div class="text-center col d-flex align-items-center">
+        <div class="m-auto">
+          <mat-spinner *ngIf="isAuthenticating" diameter="50"></mat-spinner>
+        </div>
+      </div>
+
+      <div class="mt-3 text-center">
+        <a class="alert-link" data-cy="forgetYourPasswordSelector" routerLink="/account/reset/request">نسيت كلمة المرور ؟</a>
+      </div>
+
+      <!--            <div class="mt-3 text-center">-->
+      <!--                <a href="#" class="link" (click)="register()">اذا لم يكن لديك حساب بالمنظومة اضغط هنا</a>-->
+      <!--            </div>-->
+
+      <mat-progress-bar *ngIf="isAuthenticating" class="mt-2" mode="indeterminate"></mat-progress-bar>
+    </form>
   </div>
 </div>
+<br />
+<br />

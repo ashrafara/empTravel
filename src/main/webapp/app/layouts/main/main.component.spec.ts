@@ -1,9 +1,9 @@
 jest.mock('app/core/auth/account.service');
 
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router, RouterEvent, NavigationEnd, NavigationStart } from '@angular/router';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NavigationEnd, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { Subject, of } from 'rxjs';
+import { of, Subject } from 'rxjs';
 
 import { AccountService } from 'app/core/auth/account.service';
 
@@ -49,7 +49,7 @@ describe('MainComponent', () => {
   });
 
   describe('page title', () => {
-    const defaultPageTitle = 'Emp Travel';
+    const defaultPageTitle = 'Baladyat';
     const parentRoutePageTitle = 'parentTitle';
     const childRoutePageTitle = 'childTitle';
     const navigationEnd = new NavigationEnd(1, '', '');

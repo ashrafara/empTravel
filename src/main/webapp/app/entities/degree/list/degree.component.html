@@ -1,40 +1,34 @@
-<div style="text-align: right">
-  <h2 id="page-heading" data-cy="DegreeHeading">
-    <span>الدرجة الوظيفية</span>
-
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span> تهيئة</span>
-      </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-degree"
-        [routerLink]="['/degree/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span> اضافة </span>
-      </button>
-    </div>
-  </h2>
+<div class="entity-container">
+  <h3 id="page-heading">
+    <span>الدرجات الوظيفية</span>
+  </h3>
+  <div class="mt-1 ml-1 d-flex align-items-center">
+    <button [routerLink]="['./new']" class="ml-1" color="primary" mat-raised-button>
+      <mat-icon>add</mat-icon>
+      اضافة
+    </button>
+  </div>
 
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="degrees?.length === 0">
-    <span>لا توجد الدرجة الوظيفة</span>
-  </div>
-
-  <div class="table-responsive" id="entities" *ngIf="degrees && degrees.length > 0" style="text-align: right">
-    <table class="table table-striped" aria-describedby="page-heading">
+  <div *ngIf="degrees && degrees.length > 0; else emptyContent" class="col-12 p-0 mat-elevation-z1 mt-3" id="entities">
+    <table class="col mat-table">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span>ر.م</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="name"><span>اسم الدرجة</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="number"><span>رقم الدرجة</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="id">
+            <span>ر.م</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <span>اسم الدرجة</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="number">
+            <span>رقم الدرجة</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -45,44 +39,44 @@
           </td>
           <td>{{ degree.name }}</td>
           <td>{{ degree.number }}</td>
-          <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/degree', degree.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">عرض</span>
-              </button>
+          <td class="text-left">
+            <div class="btn-group flex-btn-group-container">
+              <mat-menu #appMenu="matMenu">
+                <button [routerLink]="['./', degree.id, 'view']" mat-menu-item>
+                  <mat-icon>remove_red_eye</mat-icon>
+                  عرض
+                </button>
 
-              <button type="submit" [routerLink]="['/degree', degree.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">تعديل</span>
-              </button>
+                <button [routerLink]="['./', degree.id, 'edit']" mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  تعديل
+                </button>
+                <button (click)="delete(degree)" *jhiHasAnyAuthority="['ROLE_ADMIN']" mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  حذف
+                </button>
+              </mat-menu>
 
-              <button type="submit" (click)="delete(degree)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">حذف</span>
+              <button [matMenuTriggerFor]="appMenu" class="mr-2" mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
               </button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
-  </div>
-
-  <div *ngIf="degrees && degrees.length > 0">
-    <div class="row justify-content-center">
-      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
-    </div>
-
-    <div class="row justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
+    <div class="col white-b">
+      <mat-divider></mat-divider>
+      <mat-paginator
+        (page)="loadPage($event.pageIndex)"
+        [length]="totalItems"
+        [pageIndex]="page"
         [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-      ></ngb-pagination>
+        showFirstLastButtons
+      ></mat-paginator>
     </div>
   </div>
+  <ng-template #emptyContent>
+    <jhi-empty-content [isLoading]="isLoading"></jhi-empty-content>
+  </ng-template>
 </div>

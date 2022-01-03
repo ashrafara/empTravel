@@ -1,26 +1,16 @@
-<div class="row" dir="rtl">
-  <div class="col-md-9">
-    <h1 class="display-4" style="text-align: center">منظومة المهام</h1>
-
-    <h1><p class="lead" style="text-align: center">الصفحة الرئيسية</p></h1>
-
-    <div [ngSwitch]="account !== null">
-      <div class="alert alert-success" *ngSwitchCase="true" style="text-align: right">
-        <span id="home-logged-message" *ngIf="account">انت مسجل كمستخدم باسم "{{ account.login }}".</span>
+<div class="wide-container">
+  <div style="min-height: 400px">
+    <div class="row d-flex p-5 align-items-center main-container mx-auto h-100">
+      <div class="col-12 text-sm-right col-sm-6 text-center">
+        <h2 class="primary">لوحة التحكم</h2>
+        <p></p>
+        <h4 class="mr-1">قم بتسجيل الدخول</h4>
+        <br />
+        <h3>لتسجيل نشاطك <a routerLink="business/register"> اضغط هنا </a></h3>
       </div>
 
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>If you want to </span>
-        <a class="alert-link" (click)="login()">الدخول</a
-        ><span
-          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-          password="user").</span
-        >
-      </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>انت غير مسجل فى المنظومة؟</span>&nbsp;
-        <a class="alert-link" routerLink="account/register">سجل كحساب جديد.</a>
+      <div class="mt-4 d-flex col-6 col-sm-3">
+        <!--                <img class="mx-auto w-60" src="../../content/images/logo.png">-->
       </div>
     </div>
   </div>

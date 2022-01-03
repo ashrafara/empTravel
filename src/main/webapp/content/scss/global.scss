@@ -1,202 +1,391 @@
 @import 'bootstrap-variables';
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'material-theme.scss';
 /* ==============================================================
 Bootstrap tweaks
 ===============================================================*/
 
-body,
-h1,
-h2,
-h3,
-h4 {
-  font-weight: 300;
+* {
+  font-family: 'Almarai', 'Roboto';
+  outline: none !important;
 }
 
-/* Increase contrast of links to get 100% on Lighthouse Accessability Audit. Override this color if you want to change the link color, or use a Bootswatch theme */
-a {
-  color: #533f03;
-  font-weight: bold;
+.mat-menu-item {
+  font-family: 'Almarai', 'Roboto';
 }
 
-a:hover {
-  color: #533f03;
+input:-webkit-autofill {
+  box-shadow: 0 0 0 30px white inset;
+  -webkit-box-shadow: 0 0 0 30px white inset;
 }
 
-/* override hover color for dropdown-item forced by bootstrap to all a:not([href]):not([tabindex]) elements in _reboot.scss */
-a:not([href]):not([tabindex]):hover.dropdown-item {
-  color: $dropdown-link-hover-color;
+html {
+  height: 100 vb;
+  padding: 0px;
 }
 
-/* override .dropdown-item.active background-color on hover */
-.dropdown-item.active:hover {
-  background-color: mix($dropdown-link-hover-bg, $dropdown-link-active-bg, 50%);
+body {
+  height: 100 vb;
+  overflow: auto;
 }
 
-a:hover {
-  /* make sure browsers use the pointer cursor for anchors, even with no href */
-  cursor: pointer;
+.mat-expansion-row {
+  margin-bottom: 1px;
+  background-color: white;
+  border-bottom: 1px solid #e6e6e6;
 }
 
-.dropdown-item:hover {
-  color: $dropdown-link-hover-color;
+.fill {
+  width: 100%;
 }
 
-/* ==========================================================================
-Browser Upgrade Prompt
-========================================================================== */
-.browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+.fill-flex {
+  flex: 0 0 100%;
 }
 
-/* ==========================================================================
-Generic styles
-========================================================================== */
-
-/* Error highlight on input fields */
-.ng-valid[required],
-.ng-valid.required {
-  border-left: 5px solid green;
+.m-auto {
+  margin: auto;
 }
 
-.ng-invalid:not(form) {
-  border-left: 5px solid red;
+.white-b {
+  background-color: white;
 }
 
-/* other generic styles */
-
-.jh-card {
-  padding: 1.5%;
-  margin-top: 20px;
-  border: none;
+.gray-b {
+  background-color: rgb(247, 247, 247);
 }
 
-.error {
-  color: white;
-  background-color: red;
+.white {
+  color: white !important;
 }
 
-.pad {
-  padding: 10px;
+.hidden {
+  visibility: hidden;
 }
 
-.w-40 {
-  width: 40% !important;
+.show td:last-child div {
+  visibility: visible;
 }
 
-.w-60 {
-  width: 60% !important;
+.active {
+  color: 5 c6bc0;
 }
 
-.break {
-  white-space: normal;
-  word-break: break-all;
+.justify-text {
+  text-align: justify;
+  text-justify: inter-word;
 }
 
-.readonly {
-  background-color: #eee;
-  opacity: 1;
-}
+.detail-row {
+  margin-bottom: 0.4em;
+  padding-bottom: 0.4em;
 
-.footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-.hand,
-[jhisortby] {
-  cursor: pointer;
-}
-
-/* ==========================================================================
-Custom alerts for notification
-========================================================================== */
-.alerts {
-  .alert {
-    text-overflow: ellipsis;
-    pre {
-      background: none;
-      border: none;
-      font: inherit;
-      color: inherit;
-      padding: 0;
-      margin: 0;
-    }
-    .popover pre {
-      font-size: 10px;
-    }
-  }
-  .jhi-toast {
-    position: fixed;
-    width: 100%;
-    &.left {
-      left: 5px;
-    }
-    &.right {
-      right: 5px;
-    }
-    &.top {
-      top: 55px;
-    }
-    &.bottom {
-      bottom: 55px;
-    }
+  div:first-child {
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
   }
 }
 
-@media screen and (min-width: 480px) {
-  .alerts .jhi-toast {
-    width: 50%;
+.main-container-fix {
+  min-width: 700px; // min-height: 70vh !important;
+}
+
+//* {
+//  -webkit-touch-callout: none;
+//  -webkit-user-select: none;
+//  -khtml-user-select: none;
+//  -moz-user-select: none;
+//  -ms-user-select: none;
+//  user-select: none;
+//}
+
+.center-cropped {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+    min-width: 100%;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
   }
 }
 
-/* ==========================================================================
-entity detail page css
-========================================================================== */
-.row-md.jh-entity-details {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 10px;
-  line-height: 1.5;
+.img-logo {
+  width: auto;
+  height: 120px;
 }
 
-@media screen and (min-width: 768px) {
-  .row-md.jh-entity-details > {
-    dt {
-      float: left;
-      overflow: hidden;
-      clear: left;
-      text-align: right;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding: 0.5em 0;
-    }
-    dd {
-      border-bottom: 1px solid #eee;
-      padding: 0.5em 0;
-      margin-left: 0;
-    }
-  }
+.img-logo-toolbar {
+  width: auto;
+  height: 40px;
 }
 
-/* ==========================================================================
-ui bootstrap tweaks
-========================================================================== */
-.nav,
-.pagination,
-.carousel,
-.panel-title a {
-  cursor: pointer;
-}
-
-.thread-dump-modal-lock {
-  max-width: 450px;
+.ellipsis {
+  max-width: 300px;
+  width: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* jhipster-needle-scss-add-main JHipster will add new css style */
+.mat-card {
+  max-width: 400px;
+}
+
+h4,
+h5,
+h6 {
+  font-family: 'Almarai', 'Roboto';
+}
+
+.big-icon {
+  width: 60px !important;
+  height: 60px !important;
+  font-size: 60px;
+}
+
+.green {
+  color: #00695c !important;
+}
+
+.nav-search-box {
+  .mat-form-field-flex {
+    align-items: center;
+    background-color: rgba(239, 239, 239, 0.83);
+    border-radius: 10px !important;
+    padding: 0;
+    height: 45px;
+    border-radius: 0.3em;
+  }
+
+  .mat-form-field-infix {
+    padding: 0;
+    border-top: 0;
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .mat-form-field-prefix {
+    margin-left: 0.7em;
+    // background-color: #e0e0e096;
+    border-top-right-radius: 0.3em;
+    border-bottom-right-radius: 0.3em;
+  }
+
+  input:-webkit-autofill {
+    box-shadow: 0 0 0 10px eeeeeea2 inset;
+    -webkit-box-shadow: 0 0 0 10px eeeeeea2 inset;
+  }
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.wide-container {
+  width: 100% !important;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  min-height: calc(100vh - 200px);
+}
+
+.entity-container {
+  width: 90% !important;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  min-height: calc(100vh - 64px);
+}
+
+@media (max-width: 768px) {
+  .wide-container {
+    margin-top: 40px;
+  }
+
+  .entity-container {
+    margin-top: 40px;
+  }
+}
+
+agm-map {
+  height: 300px;
+  width: 100%;
+}
+
+.driver-map {
+  height: 600px;
+  width: 100%;
+}
+
+.dot-green {
+  height: 15px;
+  width: 15px;
+  background-color: #4bc632;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red {
+  height: 15px;
+  width: 15px;
+  background-color: #ce482c;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-orange {
+  height: 15px;
+  width: 15px;
+  background-color: #e2c641;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.box-red {
+  border-radius: 5px;
+  background-color: #e53935;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 6px;
+}
+
+.box-blue {
+  border-radius: 5px;
+  background-color: #1565c0;
+  margin: 8px;
+  padding: 6px;
+}
+
+.box-purple {
+  border-radius: 5px;
+  background-color: #673ab7;
+  margin: 8px;
+  padding: 6px;
+}
+
+.box-orange {
+  border-radius: 5px;
+  background-color: #ffb300;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 6px;
+}
+
+.box-green {
+  border-radius: 5px;
+  background-color: #4caf50;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 6px;
+}
+
+.box-black {
+  border-radius: 5px;
+  background-color: #212121;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 6px;
+}
+
+.box-grey {
+  border-radius: 5px;
+  background-color: #607d8b;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 6px;
+}
+
+.text-red {
+  color: #e53935;
+}
+
+.text-blue {
+  color: #1565c0;
+}
+
+.text-purple {
+  color: #673ab7;
+}
+
+.text-orange {
+  color: #ffb300;
+}
+
+.text-green {
+  color: #4caf50;
+}
+
+.text-black {
+  color: #212121;
+}
+
+.text-grey {
+  color: #607d8b;
+}
+
+.mat-step-header-no-click {
+  pointer-events: none !important;
+}
+
+.example-ripple {
+  cursor: pointer;
+  text-align: center;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.col-center-block {
+  float: none;
+  display: block;
+  margin: 0 auto;
+  /* margin-left: auto; margin-right: auto; */
+}
+
+.table-sized-container {
+  height: 270px;
+  overflow: auto;
+}
+
+.table-sized-container thead {
+  background: gainsboro;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+/*This will work on every browser*/
+.table-sized-container thead th {
+  background: gainsboro;
+
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+.card-container {
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-gap: 1rem;
+}
+
+.card-container-small {
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-gap: 1rem;
+}

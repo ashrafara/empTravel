@@ -1,0 +1,57 @@
+<div class="entity-container">
+  <div class="row white-bg">
+    <div class="mat-elevation-z1 p-3 round-card col-6">
+      <p>التقارير حسب</p>
+      <canvas [data]="pieChartData" [labels]="pieChartLabels" baseChart chartType="pie"></canvas>
+    </div>
+
+    <div class="mat-elevation-z1 p-3 round-card col-6">
+      <p>الايرادات حسب</p>
+      <canvas
+        *ngIf="doughnutChartData && doughnutChartLabels"
+        [data]="doughnutChartData"
+        [labels]="doughnutChartLabels"
+        baseChart
+        chartType="doughnut"
+      ></canvas>
+    </div>
+  </div>
+
+  <div class="row align-items-center mt-3" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+    <div class="mat-elevation-z1 px-4 py-3 d-flex round-card col white-bg">
+      <div class="d-flex flex-column">
+        <h3 class="m-0">{{ financialObserversCount }}</h3>
+        <p class="m-0">عدد القرارات</p>
+      </div>
+      <mat-icon class="big-icon mr-auto" color="primary">account_circle</mat-icon>
+    </div>
+
+    <span class="mx-2"></span>
+
+    <div class="mat-elevation-z1 px-4 py-3 d-flex round-card col white-bg">
+      <div class="d-flex flex-column">
+        <h3 class="m-0">{{ jehatCount }}</h3>
+        <p class="m-0">عدد الجهات</p>
+      </div>
+      <mat-icon class="big-icon mr-auto" color="primary">business</mat-icon>
+    </div>
+
+    <span class="mx-2"></span>
+    <div class="mat-elevation-z1 px-4 py-3 d-flex round-card col white-bg">
+      <div class="d-flex flex-column">
+        <h3 class="m-0">{{ mm7ReportsCount }}</h3>
+        <p class="m-0">عدد الموظفين</p>
+      </div>
+      <mat-icon class="big-icon mr-auto" color="primary">payment</mat-icon>
+    </div>
+
+    <span class="mx-2"></span>
+    <div class="mat-elevation-z1 px-4 py-3 d-flex round-card col white-bg">
+      <div class="d-flex flex-column">
+        <h3 class="m-0">{{ mh5OrdersCount }}</h3>
+        <p class="m-0">الموظف الطائر</p>
+      </div>
+      <mat-icon class="big-icon mr-auto" color="primary">business</mat-icon>
+    </div>
+  </div>
+</div>

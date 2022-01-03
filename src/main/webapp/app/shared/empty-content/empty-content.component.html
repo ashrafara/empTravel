@@ -1,0 +1,10 @@
+<div class="text-center col d-flex align-items-center" style="height: 300px">
+  <div class="m-auto">
+    <mat-spinner *ngIf="isLoading; else emptyContent" diameter="50"></mat-spinner>
+
+    <ng-template #emptyContent>
+      <!-- <img class="img-fluid  mt-5" style="height: 70px" src="assets/empty-file.svg" alt=""> -->
+      <p class="mt-2 mb-5 text-muted">لايوجد محتوى لعرضه</p>
+    </ng-template>
+  </div>
+</div>
