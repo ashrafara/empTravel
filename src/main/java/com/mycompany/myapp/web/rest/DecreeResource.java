@@ -398,4 +398,47 @@ public class DecreeResource {
         header.setContentLength(bytes.length);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bytes), header);
     }
+
+    @GetMapping(value = "/public/decrees/count-country/xlsx", produces = "application/vnd.ms-excel")
+    public ResponseEntity<byte[]> countCountryAsXSLX() {
+        List<Object[]> data = decreeRepository.findAllCountrycount();
+        String[] columns = { "decreeCount", "country name" };
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Companies");
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerFont.setFontHeightInPoints((short) 14);
+        headerFont.setColor(IndexedColors.BLACK.getIndex());
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFont(headerFont);
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < columns.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns[i]);
+            cell.setCellStyle(headerCellStyle);
+        }
+        int rowNum = 1;
+        for (Object[] object : data) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(object[0].toString());
+            row.createCell(1).setCellValue(object[1].toString());
+        }
+        for (int i = 0; i < columns.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+        byte[] bytes = new byte[0];
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            workbook.write(bos);
+            bos.close();
+            bytes = bos.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.valueOf("application/vnd.ms-excel"));
+        header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + new Date() + ".xlsx");
+        header.setContentLength(bytes.length);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bytes), header);
+    }
 }

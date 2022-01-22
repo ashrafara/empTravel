@@ -96,6 +96,11 @@ export class DecreeComponent implements OnInit {
     window.open(url, '_blank');
   }
 
+  printCountryReport(): void {
+    const url = '/api/public/decrees/count-country/xlsx';
+    window.open(url, '_blank');
+  }
+
   protected sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? ASC : DESC)];
     if (this.predicate !== 'id') {

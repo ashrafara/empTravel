@@ -33,6 +33,7 @@ public interface DecreeRepository extends JpaRepository<Decree, Long> {
         "from decree, rel_decree__employee, employee\n" +
         "WHERE decree.id = rel_decree__employee.decree_id\n" +
         "and employee.id = rel_decree__employee.employee_id\n" +
+        " and decreeyear=2021\n" +
         "order by employee.name"
     )
     List<Object[]> findAllreport();
@@ -43,6 +44,7 @@ public interface DecreeRepository extends JpaRepository<Decree, Long> {
         "from decree, rel_decree__employee, employee\n" +
         "WHERE decree.id = rel_decree__employee.decree_id\n" +
         "and employee.id = rel_decree__employee.employee_id\n" +
+        " and decreeyear=2021\n" +
         "group by employee.name\n" +
         "order by dayCount desc"
     )
@@ -54,8 +56,19 @@ public interface DecreeRepository extends JpaRepository<Decree, Long> {
         "from decree, rel_decree__employee, employee \n" +
         "WHERE decree.id = rel_decree__employee.decree_id \n" +
         "and employee.id = rel_decree__employee.employee_id \n" +
+        " and decreeyear=2021\n" +
         "group by employee.name \n" +
         "order by decreeCount desc "
     )
     List<Object[]> findAllDecreecount();
+
+    @Query(
+        nativeQuery = true,
+        value = "select Count(decree.id) as decreeCount, decree.countrty \n" +
+        "from decree \n" +
+        "WHERE decreeyear=2021\n" +
+        "group by decree.countrty \n" +
+        "order by decreeCount desc "
+    )
+    List<Object[]> findAllCountrycount();
 }
