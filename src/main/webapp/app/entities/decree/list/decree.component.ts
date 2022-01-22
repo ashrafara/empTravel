@@ -82,7 +82,17 @@ export class DecreeComponent implements OnInit {
   }
 
   printReport(): void {
-    const url = '/api/public/decree/findAllreport/';
+    const url = '/api/public/decrees/xlsx';
+    window.open(url, '_blank');
+  }
+
+  printDaysReport(): void {
+    const url = '/api/public/decrees/count-decree/xlsx';
+    window.open(url, '_blank');
+  }
+
+  printDecreeReport(): void {
+    const url = '/api/public/decrees/count-days/xlsx';
     window.open(url, '_blank');
   }
 

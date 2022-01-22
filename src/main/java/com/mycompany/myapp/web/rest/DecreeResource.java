@@ -4,19 +4,24 @@ import com.mycompany.myapp.domain.Decree;
 import com.mycompany.myapp.repository.DecreeRepository;
 import com.mycompany.myapp.service.utl.FileTools;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
+import java.io.ByteArrayOutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -101,6 +106,13 @@ public class DecreeResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
+        if (decree.getImage() != null) {
+            String filePath = FileTools.upload(decree.getImage(), decree.getImageContentType(), "decree");
+            decree.setImage(null);
+            decree.setImageContentType(decree.getImageContentType());
+            decree.setImageUrl(filePath);
+        }
+
         Decree result = decreeRepository.save(decree);
         return ResponseEntity
             .ok()
@@ -134,6 +146,13 @@ public class DecreeResource {
 
         if (!decreeRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+
+        if (decree.getImage() != null) {
+            String filePath = FileTools.upload(decree.getImage(), decree.getImageContentType(), "decree");
+            decree.setImage(null);
+            decree.setImageContentType(decree.getImageContentType());
+            decree.setImageUrl(filePath);
         }
 
         Optional<Decree> result = decreeRepository
@@ -245,5 +264,138 @@ public class DecreeResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping(value = "/public/decrees/count-days/xlsx", produces = "application/vnd.ms-excel")
+    public ResponseEntity<byte[]> countDaysAsXSLX() {
+        List<Object[]> data = decreeRepository.findAllDayCount();
+        String[] columns = { "dayCount", "employee name" };
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Companies");
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerFont.setFontHeightInPoints((short) 14);
+        headerFont.setColor(IndexedColors.BLACK.getIndex());
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFont(headerFont);
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < columns.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns[i]);
+            cell.setCellStyle(headerCellStyle);
+        }
+        int rowNum = 1;
+        for (Object[] object : data) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(object[0].toString());
+            row.createCell(1).setCellValue(object[1].toString());
+        }
+        for (int i = 0; i < columns.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+        byte[] bytes = new byte[0];
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            workbook.write(bos);
+            bos.close();
+            bytes = bos.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.valueOf("application/vnd.ms-excel"));
+        header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + new Date() + ".xlsx");
+        header.setContentLength(bytes.length);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bytes), header);
+    }
+
+    @GetMapping(value = "/public/decrees/count-decree/xlsx", produces = "application/vnd.ms-excel")
+    public ResponseEntity<byte[]> countDecreeAsXSLX() {
+        List<Object[]> data = decreeRepository.findAllDecreecount();
+        String[] columns = { "decreeCount", "employee name" };
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Companies");
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerFont.setFontHeightInPoints((short) 14);
+        headerFont.setColor(IndexedColors.BLACK.getIndex());
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFont(headerFont);
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < columns.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns[i]);
+            cell.setCellStyle(headerCellStyle);
+        }
+        int rowNum = 1;
+        for (Object[] object : data) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(object[0].toString());
+            row.createCell(1).setCellValue(object[1].toString());
+        }
+        for (int i = 0; i < columns.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+        byte[] bytes = new byte[0];
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            workbook.write(bos);
+            bos.close();
+            bytes = bos.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.valueOf("application/vnd.ms-excel"));
+        header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + new Date() + ".xlsx");
+        header.setContentLength(bytes.length);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bytes), header);
+    }
+
+    @GetMapping(value = "/public/decrees/xlsx", produces = "application/vnd.ms-excel")
+    public ResponseEntity<byte[]> getAllDecreesAsXSLX() {
+        List<Object[]> data = decreeRepository.findAllreport();
+        String[] columns = { "decreenum", "decreeyear", "countrty", "dectype", "daynum", "employee name" };
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Companies");
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerFont.setFontHeightInPoints((short) 14);
+        headerFont.setColor(IndexedColors.BLACK.getIndex());
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFont(headerFont);
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < columns.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns[i]);
+            cell.setCellStyle(headerCellStyle);
+        }
+        int rowNum = 1;
+        for (Object[] object : data) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(object[0].toString());
+            row.createCell(1).setCellValue(object[1].toString());
+            row.createCell(2).setCellValue(object[2].toString());
+            row.createCell(3).setCellValue(object[3].toString());
+            row.createCell(4).setCellValue(object[4].toString());
+            row.createCell(5).setCellValue(object[5].toString());
+        }
+        for (int i = 0; i < columns.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+        byte[] bytes = new byte[0];
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            workbook.write(bos);
+            bos.close();
+            bytes = bos.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.valueOf("application/vnd.ms-excel"));
+        header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + new Date() + ".xlsx");
+        header.setContentLength(bytes.length);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bytes), header);
     }
 }
