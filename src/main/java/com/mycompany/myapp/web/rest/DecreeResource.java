@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Decree;
 import com.mycompany.myapp.repository.DecreeRepository;
+import com.mycompany.myapp.service.utl.FileTools;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -58,6 +59,14 @@ public class DecreeResource {
         if (decree.getId() != null) {
             throw new BadRequestAlertException("A new decree cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        if (decree.getImage() != null) {
+            String filePath = FileTools.upload(decree.getImage(), decree.getImageContentType(), "decree");
+            decree.setImage(null);
+            decree.setImageContentType(decree.getImageContentType());
+            decree.setImageUrl(filePath);
+        }
+
         Decree result = decreeRepository.save(decree);
         return ResponseEntity
             .created(new URI("/api/decrees/" + result.getId()))
