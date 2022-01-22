@@ -67,6 +67,8 @@ export class DecreeUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ decree }) => {
       this.updateForm(decree);
 
+      this.selectedEmployees = decree.employees;
+
       this.loadRelationshipsOptions();
     });
   }

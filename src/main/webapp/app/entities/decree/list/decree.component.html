@@ -15,6 +15,10 @@
         <fa-icon icon="sync"></fa-icon>
         <span>تقرير الايام</span>
       </button>
+      <button class="btn btn-info mr-2" (click)="printDaysReport()">
+        <fa-icon icon="sync"></fa-icon>
+        <span>تقرير ايام الدول</span>
+      </button>
 
       <button
         id="jh-create-entity"
@@ -129,8 +133,9 @@
           <td>{{ decree.startDate | formatMediumDate }}</td>
           <td>{{ decree.endDate | formatMediumDate }}</td>
           <td>
-            <a *ngIf="decree.image" (click)="openFile(decree.image, decree.imageContentType)">فتح</a>
-            <span *ngIf="decree.image">{{ decree.imageContentType }}, {{ byteSize(decree.image) }}</span>
+            <button (click)="openFile(decree.imageUrl)" color="primary" mat-raised-button id="jh-create-entity">
+              <span class="hidden-sm-down">عرض الملف</span>
+            </button>
           </td>
           <td>
             <div *ngIf="decree.decreeissue">

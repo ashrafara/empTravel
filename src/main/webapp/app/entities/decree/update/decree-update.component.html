@@ -49,7 +49,10 @@
           <label class="form-control-label" for="field_dectype">النوع</label>
           <select class="form-control" name="dectype" formControlName="dectype" id="field_dectype" data-cy="dectype">
             <option [ngValue]="null"></option>
-            <option *ngFor="let decType of decTypeValues" [value]="decType">{{ decType }}</option>
+            <option value="TRAINING">تدريب</option>
+            <option value="WORK">مهمة عمل</option>
+            <option value="MISSION">مهمة رسمية</option>
+            <!--            <option *ngFor="let decType of decTypeValues" [value]="decType">{{ decType }}</option>-->
           </select>
         </div>
 
