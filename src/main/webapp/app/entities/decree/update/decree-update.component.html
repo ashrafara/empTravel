@@ -116,11 +116,38 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" for="field_area">Area</label>
+          <input type="text" class="form-control" name="area" id="field_area" data-cy="area" formControlName="area" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_cost">Cost</label>
+          <input type="text" class="form-control" name="cost" id="field_cost" data-cy="cost" formControlName="cost" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_decreecost">Decreecost</label>
+          <input
+            type="text"
+            class="form-control"
+            name="decreecost"
+            id="field_decreecost"
+            data-cy="decreecost"
+            formControlName="decreecost"
+          />
+        </div>
+
+        <div class="form-group" hidden>
+          <label class="form-control-label" for="field_imageUrl">Image Url</label>
+          <input type="text" class="form-control" name="imageUrl" id="field_imageUrl" data-cy="imageUrl" formControlName="imageUrl" />
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" for="field_image">صورة</label>
           <div>
             <div *ngIf="editForm.get('image')!.value" class="form-text text-danger clearfix">
               <a class="pull-left" (click)="openFile(editForm.get('image')!.value, editForm.get('imageContentType')!.value)">فتح</a><br />
-              <span class="pull-left">{{ editForm.get('imageContentType')!.value }}, {{ byteSize(editForm.get('image')!.value) }}</span>
+              <span class="pull-left">{{ editForm.get('imageContentType')!.value }} , {{ byteSize(editForm.get('image')!.value) }}</span>
               <button
                 type="button"
                 (click)="editForm.patchValue({ image: null }); editForm.patchValue({ imageContentType: null })"

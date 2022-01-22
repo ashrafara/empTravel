@@ -55,6 +55,10 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "imageUrl",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "image",
       "fieldType": "byte[]",
       "fieldTypeBlobContent": "any"

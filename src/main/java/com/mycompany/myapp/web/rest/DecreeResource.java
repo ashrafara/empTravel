@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -152,17 +151,23 @@ public class DecreeResource {
                 if (decree.getCountrty() != null) {
                     existingDecree.setCountrty(decree.getCountrty());
                 }
-                if (decree.getSponsor() != null) {
-                    existingDecree.setSponsor(decree.getSponsor());
-                }
-                if (decree.getProponent() != null) {
-                    existingDecree.setProponent(decree.getProponent());
-                }
                 if (decree.getStartDate() != null) {
                     existingDecree.setStartDate(decree.getStartDate());
                 }
                 if (decree.getEndDate() != null) {
                     existingDecree.setEndDate(decree.getEndDate());
+                }
+                if (decree.getArea() != null) {
+                    existingDecree.setArea(decree.getArea());
+                }
+                if (decree.getCost() != null) {
+                    existingDecree.setCost(decree.getCost());
+                }
+                if (decree.getDecreecost() != null) {
+                    existingDecree.setDecreecost(decree.getDecreecost());
+                }
+                if (decree.getImageUrl() != null) {
+                    existingDecree.setImageUrl(decree.getImageUrl());
                 }
                 if (decree.getImage() != null) {
                     existingDecree.setImage(decree.getImage());

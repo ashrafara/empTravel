@@ -64,6 +64,9 @@ public class Decree implements Serializable {
     @Column(name = "decreecost")
     private String decreecost;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Lob
     @Column(name = "image")
     private byte[] image;
@@ -263,6 +266,19 @@ public class Decree implements Serializable {
         this.decreecost = decreecost;
     }
 
+    public String getImageUrl() {
+        return this.imageUrl;
+    }
+
+    public Decree imageUrl(String imageUrl) {
+        this.setImageUrl(imageUrl);
+        return this;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public byte[] getImage() {
         return this.image;
     }
@@ -389,6 +405,7 @@ public class Decree implements Serializable {
             ", area='" + getArea() + "'" +
             ", cost='" + getCost() + "'" +
             ", decreecost='" + getDecreecost() + "'" +
+            ", imageUrl='" + getImageUrl() + "'" +
             ", image='" + getImage() + "'" +
             ", imageContentType='" + getImageContentType() + "'" +
             "}";

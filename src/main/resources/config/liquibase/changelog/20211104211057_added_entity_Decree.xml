@@ -48,6 +48,9 @@
             <column name="decreecost" type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
+            <column name="image_url" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
             <column name="image" type="longblob">
                 <constraints nullable="true"/>
             </column>
@@ -110,6 +113,7 @@
             <column name="area" type="string"/>
             <column name="cost" type="string"/>
             <column name="decreecost" type="string"/>
+            <column name="image_url" type="string"/>
             <column name="image" type="blob"/>
             <column name="image_content_type" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

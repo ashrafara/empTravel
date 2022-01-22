@@ -17,6 +17,7 @@ export interface IDecree {
   area?: string | null;
   cost?: string | null;
   decreecost?: string | null;
+  imageUrl?: string | null;
   imageContentType?: string | null;
   image?: string | null;
   employees?: IEmployee[] | null;
@@ -40,6 +41,7 @@ export class Decree implements IDecree {
     public area?: string | null,
     public cost?: string | null,
     public decreecost?: string | null,
+    public imageUrl?: string | null,
     public imageContentType?: string | null,
     public image?: string | null,
     public employees?: IEmployee[] | null,
