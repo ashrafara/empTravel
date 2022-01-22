@@ -3,9 +3,17 @@
     <span>القرارات</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>تهيئة</span>
+      <button class="btn btn-info mr-2" (click)="printReport()">
+        <fa-icon icon="print"></fa-icon>
+        <span>تقرير كامل</span>
+      </button>
+      <button class="btn btn-info mr-2" (click)="printReport()">
+        <fa-icon icon="print"></fa-icon>
+        <span>تقرير الايام</span>
+      </button>
+      <button class="btn btn-info mr-2" (click)="printReport()">
+        <fa-icon icon="print"></fa-icon>
+        <span>طباعة تقرير</span>
       </button>
 
       <button

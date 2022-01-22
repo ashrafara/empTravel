@@ -54,7 +54,6 @@ export class DecreeComponent implements OnInit {
         }
       );
   }
-
   ngOnInit(): void {
     this.handleNavigation();
   }
@@ -80,6 +79,11 @@ export class DecreeComponent implements OnInit {
         this.loadPage();
       }
     });
+  }
+
+  printReport(): void {
+    const url = '/api/public/decree/findAllreport/';
+    window.open(url, '_blank');
   }
 
   protected sort(): string[] {
