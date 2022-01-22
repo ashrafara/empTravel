@@ -442,10 +442,10 @@ public class DecreeResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bytes), header);
     }
 
-    @GetMapping(value = "/public/decrees/count-countryday/xlsx", produces = "application/vnd.ms-excel")
-    public ResponseEntity<byte[]> countCountryDayAsXSLX() {
+    @GetMapping(value = "/public/decrees/count-country-day/xlsx", produces = "application/vnd.ms-excel")
+    public ResponseEntity<byte[]> countCountrydayAsXSLX() {
         List<Object[]> data = decreeRepository.findAllCountryday();
-        String[] columns = { "daynum", "country name" };
+        String[] columns = { "dayCount", "country name" };
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Companies");
         Font headerFont = workbook.createFont();

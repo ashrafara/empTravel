@@ -102,7 +102,7 @@ export class DecreeComponent implements OnInit {
   }
 
   printCountryDayReport(): void {
-    const url = '/api/public/decrees/count-countryday/xlsx';
+    const url = '/api/public/decrees/count-country-day/xlsx';
     window.open(url, '_blank');
   }
 
