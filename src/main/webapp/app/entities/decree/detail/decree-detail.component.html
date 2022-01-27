@@ -30,69 +30,69 @@
         <dd>
           <span>{{ decree.dectype }}</span>
         </dd>
-        <dt><span>Daynum</span></dt>
+        <dt><span>عدد الايام</span></dt>
         <dd>
           <span>{{ decree.daynum }}</span>
         </dd>
-        <dt><span>City</span></dt>
+        <dt><span>المدينة</span></dt>
         <dd>
           <span>{{ decree.city }}</span>
         </dd>
-        <dt><span>Countrty</span></dt>
+        <dt><span>البلد</span></dt>
         <dd>
           <span>{{ decree.countrty }}</span>
         </dd>
-        <dt><span>Start Date</span></dt>
+        <dt><span>تاريخ البداية</span></dt>
         <dd>
           <span>{{ decree.startDate | formatMediumDate }}</span>
         </dd>
-        <dt><span>End Date</span></dt>
+        <dt><span>تاريخ النهاية</span></dt>
         <dd>
           <span>{{ decree.endDate | formatMediumDate }}</span>
         </dd>
-        <dt><span>Area</span></dt>
+        <dt><span>الساحة</span></dt>
         <dd>
           <span>{{ decree.area }}</span>
         </dd>
-        <dt><span>Cost</span></dt>
+        <dt><span>التكلفة</span></dt>
         <dd>
           <span>{{ decree.cost }}</span>
         </dd>
-        <dt><span>Decreecost</span></dt>
+        <dt><span>قرار التكلفة</span></dt>
         <dd>
           <span>{{ decree.decreecost }}</span>
         </dd>
-        <dt><span>Image Url</span></dt>
+        <dt><span>تحميل الصورة</span></dt>
         <dd>
           <span>{{ decree.imageUrl }}</span>
         </dd>
-        <dt><span>Image</span></dt>
+        <dt><span>القرار</span></dt>
         <dd>
           <div *ngIf="decree.image">
             <a (click)="openFile(decree.image, decree.imageContentType)">open</a>
             {{ decree.imageContentType }}, {{ byteSize(decree.image) }}
           </div>
         </dd>
-        <dt><span>Employee</span></dt>
+        <dt><span>الموظفين</span></dt>
         <dd>
           <span *ngFor="let employee of decree.employees; let last = last">
             <a [routerLink]="['/employee', employee?.id, 'view']">{{ employee.name }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
-        <dt><span>Decreeissue</span></dt>
+        <dt><span>تاريخ القرار</span></dt>
         <dd>
           <div *ngIf="decree.decreeissue">
             <a [routerLink]="['/decree-issue', decree.decreeissue?.id, 'view']">{{ decree.decreeissue?.name }}</a>
           </div>
         </dd>
-        <dt><span>Sponsor</span></dt>
+        <dt><span>الجهة المانحة</span></dt>
         <dd>
           <div *ngIf="decree.sponsor">
             <a [routerLink]="['/decree-issue', decree.sponsor?.id, 'view']">{{ decree.sponsor?.name }}</a>
           </div>
         </dd>
-        <dt><span>Proponent</span></dt>
+        <dt><span>الجهة المرشحة</span></dt>
         <dd>
           <div *ngIf="decree.proponent">
             <a [routerLink]="['/decree-issue', decree.proponent?.id, 'view']">{{ decree.proponent?.name }}</a>
@@ -101,11 +101,11 @@
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span>
       </button>
 
       <button type="button" [routerLink]="['/decree', decree.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>تعديل</span>
       </button>
     </div>
   </div>

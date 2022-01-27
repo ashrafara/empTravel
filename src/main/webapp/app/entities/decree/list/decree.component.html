@@ -3,34 +3,39 @@
     <span>القرارات</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="printReport()">
-        <fa-icon icon="sync"></fa-icon>
-        <span>تقرير كامل</span>
-      </button>
-      <button class="btn btn-info mr-2" (click)="printDecreeReport()">
-        <fa-icon icon="sync"></fa-icon>
-        <span>تقرير القرارات</span>
-      </button>
-      <button class="btn btn-info mr-2" (click)="printDaysReport()">
-        <fa-icon icon="sync"></fa-icon>
-        <span>تقرير الايام</span>
-      </button>
-      <button class="btn btn-info mr-2" (click)="printCountryReport()">
-        <fa-icon icon="sync"></fa-icon>
-        <span>تقرير ايام الدول</span>
-      </button>
-      <button class="btn btn-info mr-2" (click)="printCountryDayReport()">
-        <fa-icon icon="sync"></fa-icon>
-        <span>عدد الايام للمدن</span>
-      </button>
+      <div class="btn-group flex-btn-group-container">
+        <mat-menu #appMenu="matMenu">
+          <button mat-menu-item (click)="printReport()">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>تقرير كامل</span>
+          </button>
+          <button mat-menu-item (click)="printDecreeReport()">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>تقرير القرارات</span>
+          </button>
+          <button mat-menu-item (click)="printDaysReport()">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>تقرير الايام</span>
+          </button>
+          <button mat-menu-item (click)="printCountryReport()">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>تقرير ايام الدول</span>
+          </button>
+          <button mat-menu-item (click)="printCountryDayReport()">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>عدد الايام للمدن</span>
+          </button>
+        </mat-menu>
 
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-decree"
-        [routerLink]="['/decree/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
+        <button [matMenuTriggerFor]="appMenu" class="mr-4" mat-icon-button icon="arrow-left">
+          <mat-icon icon="arrow-left">more_vert</mat-icon>
+          التقارير
+        </button>
+      </div>
+    </div>
+    <div>
+      <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-decree" [routerLink]="['/decree/new']">
+        <fa-icon></fa-icon>
         <span> اضافة </span>
       </button>
     </div>
@@ -157,20 +162,25 @@
             </div>
           </td>
           <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/decree', decree.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">عرض</span>
-              </button>
+            <div class="btn-group flex-btn-group-container">
+              <mat-menu #appMenu="matMenu">
+                <button [routerLink]="['./', decree.id, 'view']" mat-menu-item>
+                  <mat-icon>remove_red_eye</mat-icon>
+                  عرض
+                </button>
 
-              <button type="submit" [routerLink]="['/decree', decree.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">تعديل</span>
-              </button>
+                <button [routerLink]="['./', decree.id, 'edit']" mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  تعديل
+                </button>
+                <button (click)="delete(decree)" mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  حذف
+                </button>
+              </mat-menu>
 
-              <button type="submit" (click)="delete(decree)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">حذف</span>
+              <button [matMenuTriggerFor]="appMenu" class="mr-2" mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
               </button>
             </div>
           </td>
