@@ -162,9 +162,14 @@ public class EmployeeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of employees in body.
      */
     @GetMapping("/employees")
-    public ResponseEntity<List<Employee>> getAllEmployees(Pageable pageable) {
+    public ResponseEntity<List<Employee>> getAllEmployees(Pageable pageable, String query) {
+        Page<Employee> page;
+        if (query != null) {
+            page = employeeRepository.findAllByNameContains(pageable, query);
+        } else {
+            page = employeeRepository.findAll(pageable);
+        }
         log.debug("REST request to get a page of Employees");
-        Page<Employee> page = employeeRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

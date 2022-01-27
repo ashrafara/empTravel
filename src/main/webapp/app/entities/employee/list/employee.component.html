@@ -28,7 +28,6 @@
             <button (click)="search(currentSearch)" class="input-group-append btn btn-info">
               <fa-icon icon="search"></fa-icon>
             </button>
-
             <button (click)="search('')" *ngIf="currentSearch" class="input-group-append btn btn-danger">
               <fa-icon icon="trash-alt"></fa-icon>
             </button>
@@ -43,7 +42,7 @@
   <jhi-alert></jhi-alert>
 
   <div class="alert alert-warning" id="no-result" *ngIf="employees?.length === 0">
-    <span>No employees found</span>
+    <span>لا يوجد موظف بهذا الاسم</span>
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="employees && employees.length > 0" style="text-align: right">

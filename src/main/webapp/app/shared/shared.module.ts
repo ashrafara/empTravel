@@ -10,6 +10,7 @@ import { SortByDirective } from './sort/sort-by.directive';
 import { SortDirective } from './sort/sort.directive';
 import { ItemCountComponent } from './pagination/item-count.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { TranslateMePipe } from './util/mapper.pip';
 
 @NgModule({
   imports: [SharedLibsModule, SweetAlert2Module.forRoot()],
@@ -23,6 +24,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     SortByDirective,
     SortDirective,
     ItemCountComponent,
+    TranslateMePipe,
   ],
   exports: [
     SharedLibsModule,
@@ -35,6 +37,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     SortByDirective,
     SortDirective,
     ItemCountComponent,
+    TranslateMePipe,
   ],
 })
 export class SharedModule {}

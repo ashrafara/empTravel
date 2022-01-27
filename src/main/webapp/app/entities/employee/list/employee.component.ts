@@ -81,7 +81,7 @@ export class EmployeeComponent implements OnInit {
   search(currentSearch: any): void {
     this.employeeService
       .query({
-        'employeeName.contains': currentSearch,
+        query: currentSearch,
         page: 0,
         size: this.itemsPerPage,
         sort: this.sort(),
