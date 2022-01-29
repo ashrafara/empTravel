@@ -83,4 +83,16 @@ public interface DecreeRepository extends JpaRepository<Decree, Long> {
         "order by dayCount desc;\n"
     )
     List<Object[]> findAllCountryday();
+
+    @Query(
+        nativeQuery = true,
+        value = " select sum(decree.daynum) as dayCount,Count(decree.id) as decreeCount, employee.name\n" +
+        "from decree, rel_decree__employee, employee\n" +
+        "wHERE decree.id = rel_decree__employee.decree_id\n" +
+        "and employee.id = rel_decree__employee.employee_id\n" +
+        "and decreeyear=2021\n" +
+        "group by employee.name\n" +
+        "order by dayCount desc;\n"
+    )
+    List<Object[]> findAllCountCountrydayemployee();
 }

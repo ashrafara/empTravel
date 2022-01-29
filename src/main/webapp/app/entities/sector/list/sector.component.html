@@ -54,20 +54,25 @@
             </div>
           </td>
           <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/sector', sector.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">عرض</span>
-              </button>
+            <div class="btn-group flex-btn-group-container">
+              <mat-menu #appMenu="matMenu">
+                <button [routerLink]="['./', sector.id, 'view']" mat-menu-item>
+                  <mat-icon>remove_red_eye</mat-icon>
+                  عرض
+                </button>
 
-              <button type="submit" [routerLink]="['/sector', sector.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">تعديل</span>
-              </button>
+                <button [routerLink]="['./', sector.id, 'edit']" mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  تعديل
+                </button>
+                <button (click)="delete(sector)" mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  حذف
+                </button>
+              </mat-menu>
 
-              <button type="submit" (click)="delete(sector)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">حذف</span>
+              <button [matMenuTriggerFor]="appMenu" class="mr-2" mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
               </button>
             </div>
           </td>

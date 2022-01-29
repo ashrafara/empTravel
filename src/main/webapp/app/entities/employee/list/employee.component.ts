@@ -98,6 +98,11 @@ export class EmployeeComponent implements OnInit {
       );
   }
 
+  printEmployeeReport(): void {
+    const url = '/api/public/employee/employee-report/xlsx';
+    window.open(url, '_blank');
+  }
+
   protected sort(): string[] {
     const result = [this.predicate + ',' + (this.ascending ? ASC : DESC)];
     if (this.predicate !== 'id') {

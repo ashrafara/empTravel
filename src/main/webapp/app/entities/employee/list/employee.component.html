@@ -7,7 +7,10 @@
         <fa-icon icon="print"></fa-icon>
         <span>طباعة تقرير</span>
       </button>
-
+      <button mat-menu-item (click)="printEmployeeReport()">
+        <mat-icon>remove_red_eye</mat-icon>
+        <span>كل الموظفين</span>
+      </button>
       <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
@@ -79,30 +82,25 @@
             </div>
           </td>
           <td class="text-right">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/employee', employee.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">عرض</span>
-              </button>
+            <div class="btn-group flex-btn-group-container">
+              <mat-menu #appMenu="matMenu">
+                <button [routerLink]="['./', employee.id, 'view']" mat-menu-item>
+                  <mat-icon>remove_red_eye</mat-icon>
+                  عرض
+                </button>
 
-              <button
-                type="submit"
-                [routerLink]="['/employee', employee.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">تعديل</span>
-              </button>
+                <button [routerLink]="['./', employee.id, 'edit']" mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  تعديل
+                </button>
+                <button (click)="delete(employee)" mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  حذف
+                </button>
+              </mat-menu>
 
-              <button type="submit" (click)="delete(employee)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">حذف</span>
+              <button [matMenuTriggerFor]="appMenu" class="mr-2" mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
               </button>
             </div>
           </td>

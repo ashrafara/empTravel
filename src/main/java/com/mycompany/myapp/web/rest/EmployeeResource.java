@@ -4,9 +4,12 @@ import com.mycompany.myapp.domain.Employee;
 import com.mycompany.myapp.repository.EmployeeRepository;
 import com.mycompany.myapp.service.utl.JasperReportsUtil;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
+import java.io.ByteArrayOutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -213,5 +216,53 @@ public class EmployeeResource {
         header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Name_" + System.currentTimeMillis() + ".pdf");
         header.setContentLength(fileBytes.length);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(fileBytes), header);
+    }
+
+    @GetMapping(value = "/public/employee/employee-report/xlsx", produces = "application/vnd.ms-excel")
+    public ResponseEntity<byte[]> countEmployeeAsXSLX() {
+        List<Object[]> data = employeeRepository.findAllEmployee();
+        String[] columns = { "id", "employee name", "employement", "phone", "departement", "sector", "degree " };
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Companies");
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerFont.setFontHeightInPoints((short) 14);
+        headerFont.setColor(IndexedColors.BLACK.getIndex());
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFont(headerFont);
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < columns.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns[i]);
+            cell.setCellStyle(headerCellStyle);
+        }
+        int rowNum = 1;
+        for (Object[] object : data) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(object[0].toString());
+            row.createCell(1).setCellValue(object[1].toString());
+            row.createCell(2).setCellValue(object[1].toString());
+            row.createCell(3).setCellValue(object[1].toString());
+            row.createCell(4).setCellValue(object[1].toString());
+            row.createCell(5).setCellValue(object[1].toString());
+            row.createCell(6).setCellValue(object[1].toString());
+        }
+        for (int i = 0; i < columns.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+        byte[] bytes = new byte[0];
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            workbook.write(bos);
+            bos.close();
+            bytes = bos.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.valueOf("application/vnd.ms-excel"));
+        header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + new Date() + ".xlsx");
+        header.setContentLength(bytes.length);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bytes), header);
     }
 }

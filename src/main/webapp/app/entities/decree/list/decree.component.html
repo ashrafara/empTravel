@@ -25,19 +25,22 @@
             <mat-icon>remove_red_eye</mat-icon>
             <span>عدد الايام للمدن</span>
           </button>
+          <button mat-menu-item (click)="printCtryDayReport()">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>عدد الايام والقرارات</span>
+          </button>
         </mat-menu>
-
+        <div>
+          <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-decree" [routerLink]="['/decree/new']">
+            <fa-icon></fa-icon>
+            <span> اضافة </span>
+          </button>
+        </div>
         <button [matMenuTriggerFor]="appMenu" class="mr-4" mat-icon-button icon="arrow-left">
           <mat-icon icon="arrow-left">more_vert</mat-icon>
           التقارير
         </button>
       </div>
-    </div>
-    <div>
-      <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-decree" [routerLink]="['/decree/new']">
-        <fa-icon></fa-icon>
-        <span> اضافة </span>
-      </button>
     </div>
   </h1>
 
