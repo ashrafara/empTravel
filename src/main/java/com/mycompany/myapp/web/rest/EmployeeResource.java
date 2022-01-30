@@ -218,9 +218,9 @@ public class EmployeeResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(fileBytes), header);
     }
 
-    @GetMapping(value = "/public/employee/print", produces = "application/vnd.ms-excel")
+    @GetMapping(value = "/public/employees/xlsx", produces = "application/vnd.ms-excel")
     public ResponseEntity<byte[]> getAllEmployeesAsXSLX() {
-        List<Object[]> data = employeeRepository.findAllreport();
+        List<Object[]> data = employeeRepository.findCountEmployee();
         String[] columns = { "", "", "", "", "", " employeename", "" };
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Companies");

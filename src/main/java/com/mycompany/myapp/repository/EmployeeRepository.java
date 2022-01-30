@@ -24,5 +24,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
         "            degree on employee.degree_id= degree.id\n" +
         "            ORDER BY employee.name;"
     )
-    List<Object[]> findAllreport();
+    List<Object[]> findCountEmployee();
 }

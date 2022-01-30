@@ -7,7 +7,7 @@
         <fa-icon icon="print"></fa-icon>
         <span>طباعة تقرير</span>
       </button>
-      <button class="btn btn-info mr-2" (click)="printEmployeeReport()">
+      <button class="btn btn-info mr-2" (click)="printEmployeesReport()">
         <fa-icon icon="print"></fa-icon>
         <span> تقرير</span>
       </button>
@@ -58,7 +58,10 @@
           <th scope="col" jhiSortBy="jobposition"><span>الوظيفة</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="phone"><span>الهاتف</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="departement"><span>الادارة</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="sector.name"><span>القطاع</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="sector.name">
+            <span>الجهة</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="degree.name"><span>الدرجة</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
