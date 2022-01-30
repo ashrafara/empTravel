@@ -9,6 +9,7 @@ import { IEmployee } from '../employee.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { EmployeeService } from '../service/employee.service';
 import { EmployeeDeleteDialogComponent } from '../delete/employee-delete-dialog.component';
+import { DataUtils } from '../../../core/util/data-util.service';
 
 @Component({
   selector: 'jhi-employee',
@@ -28,6 +29,7 @@ export class EmployeeComponent implements OnInit {
   constructor(
     protected employeeService: EmployeeService,
     protected activatedRoute: ActivatedRoute,
+    protected dataUtils: DataUtils,
     protected router: Router,
     protected modalService: NgbModal
   ) {}
@@ -62,6 +64,14 @@ export class EmployeeComponent implements OnInit {
     return item.id!;
   }
 
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(fileUrl: any): void {
+    window.open('/api/public/file/download/' + String(fileUrl), '_blank');
+  }
+
   delete(employee: IEmployee): void {
     const modalRef = this.modalService.open(EmployeeDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.employee = employee;
@@ -74,7 +84,12 @@ export class EmployeeComponent implements OnInit {
   }
 
   printReport(): void {
-    const url = '/api/public/employees/print/';
+    const url = '/api/public/employee/print/';
+    window.open(url, '_blank');
+  }
+
+  printEmployeeReport(): void {
+    const url = '/api/public/employee/print/';
     window.open(url, '_blank');
   }
 
@@ -96,11 +111,6 @@ export class EmployeeComponent implements OnInit {
           this.onError();
         }
       );
-  }
-
-  printEmployeeReport(): void {
-    const url = '/api/public/employee/employee-report/xlsx';
-    window.open(url, '_blank');
   }
 
   protected sort(): string[] {

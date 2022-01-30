@@ -1,7 +1,7 @@
 <div class="entity-container">
   <div class="mat-elevation-z1 round-card white-bg p-4 mt-5">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-sector-heading" data-cy="SectorCreateUpdateHeading">إنشاء قطاع</h2>
+      <h2 id="jhi-sector-heading" data-cy="SectorCreateUpdateHeading">اضافة جهة</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
@@ -12,7 +12,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_name">اسم القطاع</label>
+          <label class="form-control-label" for="field_name">اسم الجهة</label>
           <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
           <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>

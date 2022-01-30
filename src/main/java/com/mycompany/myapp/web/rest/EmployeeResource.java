@@ -206,7 +206,7 @@ public class EmployeeResource {
             .build();
     }
 
-    @GetMapping(value = "/public/employees/print/", produces = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(value = "/public/employee/print/", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<byte[]> printBusinessNameRequestPDF() {
         log.debug("REST request to get report");
         Map<String, Object> parameters = new HashMap<>();
@@ -218,10 +218,10 @@ public class EmployeeResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(fileBytes), header);
     }
 
-    @GetMapping(value = "/public/employee/employee-report/xlsx", produces = "application/vnd.ms-excel")
-    public ResponseEntity<byte[]> countEmployeeAsXSLX() {
-        List<Object[]> data = employeeRepository.findAllEmployee();
-        String[] columns = { "id", "employee name", "employement", "phone", "departement", "sector", "degree " };
+    @GetMapping(value = "/public/employee/print", produces = "application/vnd.ms-excel")
+    public ResponseEntity<byte[]> getAllEmployeesAsXSLX() {
+        List<Object[]> data = employeeRepository.findAllreport();
+        String[] columns = { "", "", "", "", "", " employeename", "" };
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Companies");
         Font headerFont = workbook.createFont();
@@ -241,11 +241,11 @@ public class EmployeeResource {
             Row row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue(object[0].toString());
             row.createCell(1).setCellValue(object[1].toString());
-            row.createCell(2).setCellValue(object[1].toString());
-            row.createCell(3).setCellValue(object[1].toString());
-            row.createCell(4).setCellValue(object[1].toString());
-            row.createCell(5).setCellValue(object[1].toString());
-            row.createCell(6).setCellValue(object[1].toString());
+            row.createCell(2).setCellValue(object[2].toString());
+            row.createCell(3).setCellValue(object[3].toString());
+            row.createCell(4).setCellValue(object[4].toString());
+            row.createCell(5).setCellValue(object[5].toString());
+            row.createCell(6).setCellValue(object[6].toString());
         }
         for (int i = 0; i < columns.length; i++) {
             sheet.autoSizeColumn(i);

@@ -16,6 +16,13 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Page<Employee> findAllByNameContains(Pageable pageable, String query);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM `employee`\n" + "ORDER by employee.name;")
-    List<Object[]> findAllEmployee();
+    @Query(
+        nativeQuery = true,
+        value = "SELECT employee.id, employee.name, employee.jobposition, employee.phone, employee.departement, sector.name, degree.name\n" +
+        "            FROM employee LEFT JOIN\n" +
+        "            sector on employee.sector_id= sector.id LEFT JOIN\n" +
+        "            degree on employee.degree_id= degree.id\n" +
+        "            ORDER BY employee.name;"
+    )
+    List<Object[]> findAllreport();
 }

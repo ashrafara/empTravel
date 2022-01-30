@@ -1,13 +1,8 @@
 <div class="entity-container">
   <h2 id="page-heading" data-cy="SectorHeading" style="text-align: right">
-    <span>القطاعات</span>
+    <span>الجهات</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>تهيئة</span>
-      </button>
-
       <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
@@ -33,7 +28,10 @@
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
           <th scope="col" jhiSortBy="id"><span>ر.م</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="name"><span>اسم القطاع</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name">
+            <span>اسم الجهة</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="phone"><span>رقم الهاتف</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="address"><span>العنوان</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="sector.name"><span>تابع لقطاع</span> <fa-icon icon="sort"></fa-icon></th>
