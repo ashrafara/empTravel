@@ -18,7 +18,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Query(
         nativeQuery = true,
-        value = "SELECT employee.id, employee.name as 'empname', employee.jobposition, employee.phone, employee.departement, " +
+        value = "SELECT employee.id, employee.name as 'empname', employee.jobposition, employee.departement, " +
         "sector.name as 'secname', degree.name as 'degname'\n" +
         "            FROM employee LEFT JOIN\n" +
         "            sector on employee.sector_id= sector.id LEFT JOIN\n" +
