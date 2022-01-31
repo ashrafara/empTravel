@@ -218,10 +218,10 @@ public class EmployeeResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(fileBytes), header);
     }
 
-    @GetMapping(value = "/public/employees/xlsx", produces = "application/vnd.ms-excel")
+    @GetMapping(value = "/public/employee/xlsx", produces = "application/vnd.ms-excel")
     public ResponseEntity<byte[]> getAllEmployeesAsXSLX() {
         List<Object[]> data = employeeRepository.findCountEmployee();
-        String[] columns = { "", "", "", "", "", " employeename", "" };
+        String[] columns = { "id", "name", "position", "departement", " sector", "degree" };
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Companies");
         Font headerFont = workbook.createFont();
@@ -240,12 +240,11 @@ public class EmployeeResource {
         for (Object[] object : data) {
             Row row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue(object[0].toString());
-            row.createCell(1).setCellValue(object[1].toString());
-            row.createCell(2).setCellValue(object[2].toString());
-            row.createCell(3).setCellValue(object[3].toString());
-            row.createCell(4).setCellValue(object[4].toString());
-            row.createCell(5).setCellValue(object[5].toString());
-            row.createCell(6).setCellValue(object[6].toString());
+            row.createCell(1).setCellValue(object[1] == null ? "" : object[1].toString());
+            row.createCell(2).setCellValue(object[2] == null ? "" : object[2].toString());
+            row.createCell(3).setCellValue(object[3] == null ? "" : object[3].toString());
+            row.createCell(4).setCellValue(object[4] == null ? "" : object[4].toString());
+            row.createCell(5).setCellValue(object[5] == null ? "" : object[5].toString());
         }
         for (int i = 0; i < columns.length; i++) {
             sheet.autoSizeColumn(i);

@@ -6,15 +6,25 @@
               name="employee" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20"
               topMargin="20" bottomMargin="20" uuid="fa4bb6cd-cc3c-4f35-ad34-f314b08033ee">
     <property name="com.jaspersoft.studio.data.sql.tables">
-        <![CDATA[c2VjdG9yICwxNzMsMTUsZWY5MTYwNjktMTVjZS00MTUxLWJhZGItZWU5OWY4MDQxMDA1O2BFbW9s
-b3llYCAsODksMTUsYTc3YTU3OGUtOGNlMy00MmFlLWJjYzMtNmY5NGEyMTk1MmUwO2RlZ3JlZSAs
-MTUsMTUsM2VkOWNiNzctZTQ0Ny00MzA2LWExMzgtOWU0ZTQ4NTU1ZDQxOw==]]>
+        <![CDATA[ZW1wbG95ZWUgLDE1LDE1LGEzMDQzMWNjLThiYjItNDQyNy1hNjdjLTIxZmI0ZjBlYzgwMjtzZWN0
+b3IgLDE0OSwyMyxhODM5OWM0ZC03OWYzLTQzYzgtYmIxYi05Mzk0ZGM5MWE5MzI7ZGVncmVlICwx
+NDksMTM4LGJiNTJlNzFkLTBmYWUtNDZiMi04ZTkzLWYzNzY4NjdiNmQyZDs=]]>
     </property>
     <property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
     <queryString language="SQL">
-        <![CDATA[SELECT employee.id, employee.name,employee.jobposition,sector.name
-FROM `employee` right JOIN
-sector ON employee.id= sector.id]]>
+        <![CDATA[SELECT employee.id,
+	employee.name,
+	employee.jobposition,
+	employee.phone,
+	employee.departement,
+	sector.name,
+	degree.name
+FROM employee
+	LEFT JOIN sector ON
+	 employee.sector_id = sector.id
+	LEFT JOIN degree ON
+	 employee.degree_id = degree.id
+ORDER BY employee.name DESC]]>
     </queryString>
     <field name="id" class="java.lang.Long">
         <property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -31,10 +41,25 @@ sector ON employee.id= sector.id]]>
         <property name="com.jaspersoft.studio.field.label" value="jobposition"/>
         <property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
     </field>
-    <field name="COLUMN_4" class="java.lang.String">
+    <field name="phone" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="phone"/>
+        <property name="com.jaspersoft.studio.field.label" value="phone"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+    </field>
+    <field name="departement" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="departement"/>
+        <property name="com.jaspersoft.studio.field.label" value="departement"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+    </field>
+    <field name="COLUMN_6" class="java.lang.String">
         <property name="com.jaspersoft.studio.field.name" value="name"/>
         <property name="com.jaspersoft.studio.field.label" value="name"/>
         <property name="com.jaspersoft.studio.field.tree.path" value="sector"/>
+    </field>
+    <field name="COLUMN_7" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="name"/>
+        <property name="com.jaspersoft.studio.field.label" value="name"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="degree"/>
     </field>
     <group name="id">
         <groupExpression><![CDATA[$F{id}]]></groupExpression>
@@ -45,8 +70,17 @@ sector ON employee.id= sector.id]]>
     <group name="jobposition">
         <groupExpression><![CDATA[$F{jobposition}]]></groupExpression>
     </group>
-    <group name="COLUMN_4">
-        <groupExpression><![CDATA[$F{COLUMN_4}]]></groupExpression>
+    <group name="phone">
+        <groupExpression><![CDATA[$F{phone}]]></groupExpression>
+    </group>
+    <group name="departement">
+        <groupExpression><![CDATA[$F{departement}]]></groupExpression>
+    </group>
+    <group name="COLUMN_6">
+        <groupExpression><![CDATA[$F{COLUMN_6}]]></groupExpression>
+    </group>
+    <group name="COLUMN_7">
+        <groupExpression><![CDATA[$F{COLUMN_7}]]></groupExpression>
     </group>
     <background>
         <band splitType="Stretch"/>
@@ -102,46 +136,48 @@ sector ON employee.id= sector.id]]>
         </band>
     </columnHeader>
     <detail>
-        <band height="42" splitType="Stretch">
+        <band height="50" splitType="Stretch">
             <textField>
-                <reportElement x="490" y="10" width="70" height="30" uuid="0076d3c1-c15a-4874-b9c4-035ff86bdb53">
+                <reportElement x="520" y="10" width="40" height="30" uuid="11de4310-25d3-46f7-af60-43470d1c22b0">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID"
-                              value="47fa9c3b-f214-46ee-aae4-c11efdab067f"/>
+                              value="5f5bb9cf-9893-4ebe-ba87-09ac312e851f"/>
                 </reportElement>
-                <textElement textAlignment="Right" verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="330" y="10" width="150" height="30" uuid="514c9544-fa3a-4832-a779-4114f3d160cc">
+                <reportElement x="410" y="10" width="100" height="30" uuid="3ec560c9-fe13-4bda-a0c6-fd11f8eced8e">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID"
-                              value="3b9d6af2-3348-4324-99e5-465ea37b06e8"/>
+                              value="d9559086-a4ad-487c-be9a-b903f741aab6"/>
                 </reportElement>
-                <textElement textAlignment="Right" verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="220" y="10" width="100" height="30" uuid="adf9e259-6572-4a02-8f02-b9437732bad9">
+                <reportElement x="303" y="9" width="100" height="30" uuid="d163fde2-5c35-4abd-b78d-20d5cd2045e5">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID"
-                              value="2d58769a-4d45-486f-851d-49d38949d751"/>
+                              value="3a965975-39d1-4dfe-82c8-26a6eda89af0"/>
                 </reportElement>
-                <textElement textAlignment="Right" verticalAlignment="Middle"/>
                 <textFieldExpression><![CDATA[$F{jobposition}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="110" y="10" width="100" height="30" uuid="80302c61-3bdd-4be2-a0ce-76659a6a5c85">
+                <reportElement x="198" y="9" width="100" height="30" uuid="72626f6b-0046-46c3-affc-49382467d14e">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID"
-                              value="abe92196-715c-4851-b14c-915bf29eb81d"/>
+                              value="916c7bdf-3f7f-4653-9fe6-21e1f4357c95"/>
                 </reportElement>
-                <textElement textAlignment="Right" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{jobposition}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{departement}]]></textFieldExpression>
             </textField>
             <textField>
-                <reportElement x="0" y="10" width="100" height="30" uuid="36f5615e-3595-4e52-b985-7e7f0ea0e900">
+                <reportElement x="94" y="8" width="100" height="30" uuid="35119436-6af1-4e97-89c4-4ecb37544aa0">
                     <property name="com.jaspersoft.studio.spreadsheet.connectionID"
-                              value="2544ce32-abf9-480a-99eb-f38fc9f69eb2"/>
+                              value="cba86760-4439-435b-aa06-62dd7ee1d3e6"/>
                 </reportElement>
-                <textElement textAlignment="Right" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{COLUMN_4}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{COLUMN_6}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="-12" y="7" width="100" height="30" uuid="52f0d60d-c7c3-4af7-80dd-de22d60c7559">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="9eb9fd9a-e062-40b0-9441-0ea47e3e905a"/>
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{COLUMN_7}]]></textFieldExpression>
             </textField>
         </band>
     </detail>

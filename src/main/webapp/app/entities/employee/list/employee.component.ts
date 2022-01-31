@@ -89,7 +89,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   printEmployeesReport(): void {
-    const url = '/api/public/employees/xlsx/';
+    const url = '/api/public/employee/xlsx/';
     window.open(url, '_blank');
   }
 
