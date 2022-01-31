@@ -43,7 +43,7 @@
     "clientThemeVariant": "",
     "enableGradleEnterprise": false,
     "languages": ["en", "fr"],
-    "entities": ["Employee", "Sector", "Decree", "DecreeIssue", "Degree"],
-    "lastLiquibaseTimestamp": 1636060259000
+    "entities": ["Employee", "Sector", "Decree", "DecreeIssue", "Degree", "Zone", "Country"],
+    "lastLiquibaseTimestamp": 1643645852000
   }
 }

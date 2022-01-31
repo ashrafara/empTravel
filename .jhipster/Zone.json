@@ -1,0 +1,26 @@
+{
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "amount1",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "amount2",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "amount3",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [],
+  "service": "no",
+  "readOnly": false,
+  "pagination": "no",
+  "name": "Zone",
+  "changelogDate": "20220131161341"
+}

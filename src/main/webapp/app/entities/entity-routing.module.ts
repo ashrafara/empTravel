@@ -34,6 +34,16 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'Degrees' },
         loadChildren: () => import('./degree/degree.module').then(m => m.DegreeModule),
       },
+      {
+        path: 'zone',
+        data: { pageTitle: 'Zones' },
+        loadChildren: () => import('./zone/zone.module').then(m => m.ZoneModule),
+      },
+      {
+        path: 'country',
+        data: { pageTitle: 'Countries' },
+        loadChildren: () => import('./country/country.module').then(m => m.CountryModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

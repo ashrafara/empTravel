@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="zone">
+      <h2 data-cy="zoneDetailsHeading"><span>Zone</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ zone.id }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ zone.name }}</span>
+        </dd>
+        <dt><span>Amount 1</span></dt>
+        <dd>
+          <span>{{ zone.amount1 }}</span>
+        </dd>
+        <dt><span>Amount 2</span></dt>
+        <dd>
+          <span>{{ zone.amount2 }}</span>
+        </dd>
+        <dt><span>Amount 3</span></dt>
+        <dd>
+          <span>{{ zone.amount3 }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/zone', zone.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
