@@ -1,23 +1,23 @@
-<div class="row justify-content-center">
-  <div class="col-8">
+<div class="entity-container">
+  <div class="mat-elevation-z1 round-card white-bg p-4 mt-5">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-country-heading" data-cy="CountryCreateUpdateHeading">Create or edit a Country</h2>
+      <h2 id="jhi-country-heading" data-cy="CountryCreateUpdateHeading">اضافة او تعديل</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
 
         <div class="form-group" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-control-label" for="field_id">ID</label>
+          <label class="form-control-label" for="field_id">ر.م</label>
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_name">Name</label>
+          <label class="form-control-label" for="field_name">اسم البلد</label>
           <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_zone">Zone</label>
+          <label class="form-control-label" for="field_zone">المناطق</label>
           <select class="form-control" id="field_zone" data-cy="zone" name="zone" formControlName="zone">
             <option [ngValue]="null"></option>
             <option
@@ -32,7 +32,7 @@
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>الغاء</span>
         </button>
 
         <button
@@ -42,7 +42,7 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>حفظ</span>
         </button>
       </div>
     </form>

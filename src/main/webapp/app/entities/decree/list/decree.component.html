@@ -84,46 +84,50 @@
             <span>ملاحظات</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="countrty">
+          <!--          <th scope="col" jhiSortBy="countrty">-->
+          <!--            <span>البلد</span>-->
+          <!--            <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
+          <th scope="col" jhiSortBy="country.name">
             <span>البلد</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="decreenum">
-            <span>الساحة </span>
-            <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="decreenum">
-            <span>التكلفة </span>
-            <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="decreenum">
-            <span>قرار التكلفة </span>
-            <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="startDate">
-            <span> تاريخ البداية</span>
-            <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="endDate">
-            <span> تاريخ النهاية</span>
-            <fa-icon icon="sort"></fa-icon>
-          </th>
+          <!--          <th scope="col" jhiSortBy="decreenum">-->
+          <!--            <span>الساحة </span>-->
+          <!--            <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
+          <!--          <th scope="col" jhiSortBy="decreenum">-->
+          <!--            <span>التكلفة </span>-->
+          <!--            <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
+          <!--          <th scope="col" jhiSortBy="decreenum">-->
+          <!--            <span>قرار التكلفة </span>-->
+          <!--            <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
+          <!--          <th scope="col" jhiSortBy="startDate">-->
+          <!--            <span> تاريخ البداية</span>-->
+          <!--            <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
+          <!--          <th scope="col" jhiSortBy="endDate">-->
+          <!--            <span> تاريخ النهاية</span>-->
+          <!--            <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
           <th scope="col" jhiSortBy="image">
             <span>صورة</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="decreeissue.name">
-            <span>الجهة المصدرة للقرار</span>
-            <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="sponsor.name">
-            <span>الجهة المموله</span>
-            <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="proponent.name">
-            <span>الجهة المرشحة</span>
-            <fa-icon icon="sort"></fa-icon>
-          </th>
+          <!--          <th scope="col" jhiSortBy="decreeissue.name">-->
+          <!--            <span>الجهة المصدرة للقرار</span>-->
+          <!--            <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
+          <!--          <th scope="col" jhiSortBy="sponsor.name">-->
+          <!--            <span>الجهة المموله</span>-->
+          <!--            <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
+          <!--          <th scope="col" jhiSortBy="proponent.name">-->
+          <!--            <span>الجهة المرشحة</span>-->
+          <!--            <fa-icon icon="sort"></fa-icon>-->
+          <!--          </th>-->
           <th scope="col"></th>
         </tr>
       </thead>
@@ -138,32 +142,33 @@
           <td>{{ decree.dectype | translateMe }}</td>
           <td>{{ decree.daynum }}</td>
           <td>{{ decree.city }}</td>
-          <td>{{ decree.countrty }}</td>
-          <td>{{ decree.area }}</td>
-          <td>{{ decree.cost }}</td>
-          <td>{{ decree.decreecost }}</td>
-          <td>{{ decree.startDate | formatMediumDate }}</td>
-          <td>{{ decree.endDate | formatMediumDate }}</td>
+          <!--          <td>{{ decree.countrty }}</td>-->
+          <td>{{ decree.country?.name }}</td>
+          <!--          <td>{{ decree.area }}</td>-->
+          <!--          <td>{{ decree.cost }}</td>-->
+          <!--          <td>{{ decree.decreecost }}</td>-->
+          <!--          <td>{{ decree.startDate | formatMediumDate }}</td>-->
+          <!--          <td>{{ decree.endDate | formatMediumDate }}</td>-->
           <td>
             <button (click)="openFile(decree.imageUrl)" color="primary" mat-raised-button id="jh-create-entity">
               <span class="hidden-sm-down">عرض الملف</span>
             </button>
           </td>
-          <td>
-            <div *ngIf="decree.decreeissue">
-              <a [routerLink]="['/decree-issue', decree.decreeissue?.id, 'view']">{{ decree.decreeissue?.name }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="decree.sponsor">
-              <a [routerLink]="['/decree-issue', decree.sponsor?.id, 'view']">{{ decree.sponsor?.name }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="decree.proponent">
-              <a [routerLink]="['/decree-issue', decree.proponent?.id, 'view']">{{ decree.proponent?.name }}</a>
-            </div>
-          </td>
+          <!--          <td>-->
+          <!--            <div *ngIf="decree.decreeissue">-->
+          <!--              <a [routerLink]="['/decree-issue', decree.decreeissue?.id, 'view']">{{ decree.decreeissue?.name }}</a>-->
+          <!--            </div>-->
+          <!--          </td>-->
+          <!--          <td>-->
+          <!--            <div *ngIf="decree.sponsor">-->
+          <!--              <a [routerLink]="['/decree-issue', decree.sponsor?.id, 'view']">{{ decree.sponsor?.name }}</a>-->
+          <!--            </div>-->
+          <!--          </td>-->
+          <!--          <td>-->
+          <!--            <div *ngIf="decree.proponent">-->
+          <!--              <a [routerLink]="['/decree-issue', decree.proponent?.id, 'view']">{{ decree.proponent?.name }}</a>-->
+          <!--            </div>-->
+          <!--          </td>-->
           <td class="text-right">
             <div class="btn-group flex-btn-group-container">
               <mat-menu #appMenu="matMenu">

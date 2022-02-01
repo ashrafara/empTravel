@@ -93,6 +93,13 @@
       "otherEntityRelationshipName": "proponent",
       "relationshipName": "proponent",
       "otherEntityField": "name"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "country",
+      "otherEntityRelationshipName": "decree",
+      "relationshipName": "country",
+      "otherEntityField": "name"
     }
   ],
   "entityTableName": "decree",

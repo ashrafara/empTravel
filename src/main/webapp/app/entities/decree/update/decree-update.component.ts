@@ -14,6 +14,8 @@ import { Employee, IEmployee } from 'app/entities/employee/employee.model';
 import { EmployeeService } from 'app/entities/employee/service/employee.service';
 import { IDecreeIssue } from 'app/entities/decree-issue/decree-issue.model';
 import { DecreeIssueService } from 'app/entities/decree-issue/service/decree-issue.service';
+import { ICountry } from 'app/entities/country/country.model';
+import { CountryService } from 'app/entities/country/service/country.service';
 import { DecType } from 'app/entities/enumerations/dec-type.model';
 import { INgxSelectOption } from 'ngx-select-ex';
 
@@ -29,6 +31,7 @@ export class DecreeUpdateComponent implements OnInit {
 
   employeesSharedCollection: IEmployee[] = [];
   decreeIssuesSharedCollection: IDecreeIssue[] = [];
+  countriesSharedCollection: ICountry[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -51,6 +54,7 @@ export class DecreeUpdateComponent implements OnInit {
     decreeissue: [],
     sponsor: [],
     proponent: [],
+    country: [],
   });
 
   constructor(
@@ -59,6 +63,7 @@ export class DecreeUpdateComponent implements OnInit {
     protected decreeService: DecreeService,
     protected employeeService: EmployeeService,
     protected decreeIssueService: DecreeIssueService,
+    protected countryService: CountryService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -108,6 +113,10 @@ export class DecreeUpdateComponent implements OnInit {
   }
 
   trackDecreeIssueById(index: number, item: IDecreeIssue): number {
+    return item.id!;
+  }
+
+  trackCountryById(index: number, item: ICountry): number {
     return item.id!;
   }
 
@@ -176,6 +185,7 @@ export class DecreeUpdateComponent implements OnInit {
       decreeissue: decree.decreeissue,
       sponsor: decree.sponsor,
       proponent: decree.proponent,
+      country: decree.country,
     });
 
     this.employeesSharedCollection = this.employeeService.addEmployeeToCollectionIfMissing(
@@ -188,6 +198,7 @@ export class DecreeUpdateComponent implements OnInit {
       decree.sponsor,
       decree.proponent
     );
+    this.countriesSharedCollection = this.countryService.addCountryToCollectionIfMissing(this.countriesSharedCollection, decree.country);
   }
 
   protected loadRelationshipsOptions(): void {
@@ -215,6 +226,14 @@ export class DecreeUpdateComponent implements OnInit {
         )
       )
       .subscribe((decreeIssues: IDecreeIssue[]) => (this.decreeIssuesSharedCollection = decreeIssues));
+
+    this.countryService
+      .query()
+      .pipe(map((res: HttpResponse<ICountry[]>) => res.body ?? []))
+      .pipe(
+        map((countries: ICountry[]) => this.countryService.addCountryToCollectionIfMissing(countries, this.editForm.get('country')!.value))
+      )
+      .subscribe((countries: ICountry[]) => (this.countriesSharedCollection = countries));
   }
 
   protected createFromForm(): IDecree {
@@ -240,6 +259,7 @@ export class DecreeUpdateComponent implements OnInit {
       decreeissue: this.editForm.get(['decreeissue'])!.value,
       sponsor: this.editForm.get(['sponsor'])!.value,
       proponent: this.editForm.get(['proponent'])!.value,
+      country: this.editForm.get(['country'])!.value,
     };
   }
 }

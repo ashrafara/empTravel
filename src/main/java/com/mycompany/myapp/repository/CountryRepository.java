@@ -1,7 +1,8 @@
 package com.mycompany.myapp.repository;
 
 import com.mycompany.myapp.domain.Country;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface CountryRepository extends JpaRepository<Country, Long> {}
+public interface CountryRepository extends JpaRepository<Country, Long> {
+    List<Country> findAllByOrderByNameAsc();
+}

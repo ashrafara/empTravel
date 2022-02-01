@@ -2,18 +2,22 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Employee;
 import com.mycompany.myapp.repository.EmployeeRepository;
+import com.mycompany.myapp.service.utl.JasperReportsUtil;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
+import java.io.ByteArrayOutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +42,9 @@ public class EmployeeResource {
     private String applicationName;
 
     private final EmployeeRepository employeeRepository;
+
+    @Autowired
+    JasperReportsUtil jasperReportsUtil;
 
     public EmployeeResource(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -158,9 +165,14 @@ public class EmployeeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of employees in body.
      */
     @GetMapping("/employees")
-    public ResponseEntity<List<Employee>> getAllEmployees(Pageable pageable) {
+    public ResponseEntity<List<Employee>> getAllEmployees(Pageable pageable, String query) {
+        Page<Employee> page;
+        if (query != null) {
+            page = employeeRepository.findAllByNameContains(pageable, query);
+        } else {
+            page = employeeRepository.findAll(pageable);
+        }
         log.debug("REST request to get a page of Employees");
-        Page<Employee> page = employeeRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -192,5 +204,64 @@ public class EmployeeResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping(value = "/public/employee/print/", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<byte[]> printBusinessNameRequestPDF() {
+        log.debug("REST request to get report");
+        Map<String, Object> parameters = new HashMap<>();
+        byte[] fileBytes = jasperReportsUtil.getReportAsPDF(parameters, "employee");
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_PDF);
+        header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Name_" + System.currentTimeMillis() + ".pdf");
+        header.setContentLength(fileBytes.length);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(fileBytes), header);
+    }
+
+    @GetMapping(value = "/public/employee/xlsx", produces = "application/vnd.ms-excel")
+    public ResponseEntity<byte[]> getAllEmployeesAsXSLX() {
+        List<Object[]> data = employeeRepository.findCountEmployee();
+        String[] columns = { "id", "name", "position", "departement", " sector", "degree" };
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Companies");
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerFont.setFontHeightInPoints((short) 14);
+        headerFont.setColor(IndexedColors.BLACK.getIndex());
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFont(headerFont);
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < columns.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns[i]);
+            cell.setCellStyle(headerCellStyle);
+        }
+        int rowNum = 1;
+        for (Object[] object : data) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(object[0].toString());
+            row.createCell(1).setCellValue(object[1] == null ? "" : object[1].toString());
+            row.createCell(2).setCellValue(object[2] == null ? "" : object[2].toString());
+            row.createCell(3).setCellValue(object[3] == null ? "" : object[3].toString());
+            row.createCell(4).setCellValue(object[4] == null ? "" : object[4].toString());
+            row.createCell(5).setCellValue(object[5] == null ? "" : object[5].toString());
+        }
+        for (int i = 0; i < columns.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+        byte[] bytes = new byte[0];
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            workbook.write(bos);
+            bos.close();
+            bytes = bos.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.valueOf("application/vnd.ms-excel"));
+        header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + new Date() + ".xlsx");
+        header.setContentLength(bytes.length);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bytes), header);
     }
 }

@@ -37,5 +37,11 @@
                                  constraintName="fk_decree__proponent_id"
                                  referencedColumnNames="id"
                                  referencedTableName="decree_issue"/>
+
+        <addForeignKeyConstraint baseColumnNames="country_id"
+                                 baseTableName="decree"
+                                 constraintName="fk_decree__country_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="country"/>
     </changeSet>
 </databaseChangeLog>

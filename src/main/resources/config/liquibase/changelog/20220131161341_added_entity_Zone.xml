@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
         Added the entity Zone.
@@ -13,16 +15,16 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="amount_1" type="integer">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="amount_2" type="integer">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="amount_3" type="integer">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -40,10 +42,10 @@
     -->
     <changeSet id="20220131161341-1-data" author="jhipster" context="faker">
         <loadData
-            file="config/liquibase/fake-data/zone.csv"
-            separator=";"
-            tableName="zone"
-            usePreparedStatements="true">
+                  file="config/liquibase/fake-data/zone.csv"
+                  separator=";"
+                  tableName="zone"
+                  usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="amount_1" type="numeric"/>

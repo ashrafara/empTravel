@@ -61,7 +61,7 @@ public class CountryResource {
     /**
      * {@code PUT  /countries/:id} : Updates an existing country.
      *
-     * @param id      the id of the country to save.
+     * @param id the id of the country to save.
      * @param country the country to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated country,
      * or with status {@code 400 (Bad Request)} if the country is not valid,
@@ -93,7 +93,7 @@ public class CountryResource {
     /**
      * {@code PATCH  /countries/:id} : Partial updates given fields of an existing country, field will ignore if it is null
      *
-     * @param id      the id of the country to save.
+     * @param id the id of the country to save.
      * @param country the country to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated country,
      * or with status {@code 400 (Bad Request)} if the country is not valid,
@@ -143,7 +143,7 @@ public class CountryResource {
     @GetMapping("/countries")
     public List<Country> getAllCountries() {
         log.debug("REST request to get all Countries");
-        return countryRepository.findAll();
+        return countryRepository.findAllByOrderByNameAsc();
     }
 
     /**

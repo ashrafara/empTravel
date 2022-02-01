@@ -70,13 +70,13 @@
           <input type="text" class="form-control" name="city" id="field_city" data-cy="city" formControlName="city" />
         </div>
 
-        <div class="form-group">
-          <label class="form-control-label" for="field_countrty">البلد</label>
-          <input type="text" class="form-control" name="countrty" id="field_countrty" data-cy="countrty" formControlName="countrty" />
-          <div *ngIf="editForm.get('countrty')!.invalid && (editForm.get('countrty')!.dirty || editForm.get('countrty')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('countrty')?.errors?.required"> البيانات مطلوبة. </small>
-          </div>
-        </div>
+        <!--        <div class="form-group">-->
+        <!--          <label class="form-control-label" for="field_countrty">البلد</label>-->
+        <!--          <input type="text" class="form-control" name="countrty" id="field_countrty" data-cy="countrty" formControlName="countrty" />-->
+        <!--          <div *ngIf="editForm.get('countrty')!.invalid && (editForm.get('countrty')!.dirty || editForm.get('countrty')!.touched)">-->
+        <!--            <small class="form-text text-danger" *ngIf="editForm.get('countrty')?.errors?.required"> البيانات مطلوبة. </small>-->
+        <!--          </div>-->
+        <!--        </div>-->
 
         <div class="form-group">
           <label class="form-control-label" for="field_startDate">تاريخ البداية</label>
@@ -230,6 +230,19 @@
               *ngFor="let decreeIssueOption of decreeIssuesSharedCollection; trackBy: trackDecreeIssueById"
             >
               {{ decreeIssueOption.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_country">البلد</label>
+          <select class="form-control" id="field_country" data-cy="country" name="country" formControlName="country">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="countryOption.id === editForm.get('country')!.value?.id ? editForm.get('country')!.value : countryOption"
+              *ngFor="let countryOption of countriesSharedCollection; trackBy: trackCountryById"
+            >
+              {{ countryOption.name }}
             </option>
           </select>
         </div>

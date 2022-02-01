@@ -38,10 +38,10 @@
         <dd>
           <span>{{ decree.city }}</span>
         </dd>
-        <dt><span>البلد</span></dt>
-        <dd>
-          <span>{{ decree.countrty }}</span>
-        </dd>
+        <!--        <dt><span>البلد</span></dt>-->
+        <!--        <dd>-->
+        <!--          <span>{{ decree.countrty }}</span>-->
+        <!--        </dd>-->
         <dt><span>تاريخ البداية</span></dt>
         <dd>
           <span>{{ decree.startDate | formatMediumDate }}</span>
@@ -96,6 +96,13 @@
         <dd>
           <div *ngIf="decree.proponent">
             <a [routerLink]="['/decree-issue', decree.proponent?.id, 'view']">{{ decree.proponent?.name }}</a>
+          </div>
+        </dd>
+
+        <dt><span>البلدان</span></dt>
+        <dd>
+          <div *ngIf="decree.country">
+            <a [routerLink]="['/country', decree.country?.id, 'view']">{{ decree.country?.name }}</a>
           </div>
         </dd>
       </dl>

@@ -8,11 +8,13 @@ import { ActivatedRoute } from '@angular/router';
 import { of, Subject } from 'rxjs';
 
 import { DecreeService } from '../service/decree.service';
-import { Decree, IDecree } from '../decree.model';
+import { IDecree, Decree } from '../decree.model';
 import { IEmployee } from 'app/entities/employee/employee.model';
 import { EmployeeService } from 'app/entities/employee/service/employee.service';
 import { IDecreeIssue } from 'app/entities/decree-issue/decree-issue.model';
 import { DecreeIssueService } from 'app/entities/decree-issue/service/decree-issue.service';
+import { ICountry } from 'app/entities/country/country.model';
+import { CountryService } from 'app/entities/country/service/country.service';
 
 import { DecreeUpdateComponent } from './decree-update.component';
 
@@ -23,6 +25,7 @@ describe('Decree Management Update Component', () => {
   let decreeService: DecreeService;
   let employeeService: EmployeeService;
   let decreeIssueService: DecreeIssueService;
+  let countryService: CountryService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,6 +41,7 @@ describe('Decree Management Update Component', () => {
     decreeService = TestBed.inject(DecreeService);
     employeeService = TestBed.inject(EmployeeService);
     decreeIssueService = TestBed.inject(DecreeIssueService);
+    countryService = TestBed.inject(CountryService);
 
     comp = fixture.componentInstance;
   });
@@ -85,6 +89,25 @@ describe('Decree Management Update Component', () => {
       expect(comp.decreeIssuesSharedCollection).toEqual(expectedCollection);
     });
 
+    it('Should call Country query and add missing value', () => {
+      const decree: IDecree = { id: 456 };
+      const country: ICountry = { id: 41938 };
+      decree.country = country;
+
+      const countryCollection: ICountry[] = [{ id: 82470 }];
+      jest.spyOn(countryService, 'query').mockReturnValue(of(new HttpResponse({ body: countryCollection })));
+      const additionalCountries = [country];
+      const expectedCollection: ICountry[] = [...additionalCountries, ...countryCollection];
+      jest.spyOn(countryService, 'addCountryToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ decree });
+      comp.ngOnInit();
+
+      expect(countryService.query).toHaveBeenCalled();
+      expect(countryService.addCountryToCollectionIfMissing).toHaveBeenCalledWith(countryCollection, ...additionalCountries);
+      expect(comp.countriesSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should update editForm', () => {
       const decree: IDecree = { id: 456 };
       const employees: IEmployee = { id: 39020 };
@@ -95,6 +118,8 @@ describe('Decree Management Update Component', () => {
       decree.sponsor = sponsor;
       const proponent: IDecreeIssue = { id: 6925 };
       decree.proponent = proponent;
+      const country: ICountry = { id: 79889 };
+      decree.country = country;
 
       activatedRoute.data = of({ decree });
       comp.ngOnInit();
@@ -104,6 +129,7 @@ describe('Decree Management Update Component', () => {
       expect(comp.decreeIssuesSharedCollection).toContain(decreeissue);
       expect(comp.decreeIssuesSharedCollection).toContain(sponsor);
       expect(comp.decreeIssuesSharedCollection).toContain(proponent);
+      expect(comp.countriesSharedCollection).toContain(country);
     });
   });
 
@@ -184,6 +210,14 @@ describe('Decree Management Update Component', () => {
       it('Should return tracked DecreeIssue primary key', () => {
         const entity = { id: 123 };
         const trackResult = comp.trackDecreeIssueById(0, entity);
+        expect(trackResult).toEqual(entity.id);
+      });
+    });
+
+    describe('trackCountryById', () => {
+      it('Should return tracked Country primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackCountryById(0, entity);
         expect(trackResult).toEqual(entity.id);
       });
     });

@@ -1,6 +1,7 @@
 import * as dayjs from 'dayjs';
 import { IEmployee } from 'app/entities/employee/employee.model';
 import { IDecreeIssue } from 'app/entities/decree-issue/decree-issue.model';
+import { ICountry } from 'app/entities/country/country.model';
 import { DecType } from 'app/entities/enumerations/dec-type.model';
 
 export interface IDecree {
@@ -24,6 +25,7 @@ export interface IDecree {
   decreeissue?: IDecreeIssue | null;
   sponsor?: IDecreeIssue | null;
   proponent?: IDecreeIssue | null;
+  country?: ICountry | null;
 }
 
 export class Decree implements IDecree {
@@ -47,7 +49,8 @@ export class Decree implements IDecree {
     public employees?: IEmployee[] | null,
     public decreeissue?: IDecreeIssue | null,
     public sponsor?: IDecreeIssue | null,
-    public proponent?: IDecreeIssue | null
+    public proponent?: IDecreeIssue | null,
+    public country?: ICountry | null
   ) {}
 }
 

@@ -10,34 +10,34 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span>ID</span></dt>
+        <dt><span>ر.م</span></dt>
         <dd>
           <span>{{ zone.id }}</span>
         </dd>
-        <dt><span>Name</span></dt>
+        <dt><span>اسم المنطقة</span></dt>
         <dd>
           <span>{{ zone.name }}</span>
         </dd>
-        <dt><span>Amount 1</span></dt>
+        <dt><span>القيمة 1</span></dt>
         <dd>
           <span>{{ zone.amount1 }}</span>
         </dd>
-        <dt><span>Amount 2</span></dt>
+        <dt><span>القيمة 2</span></dt>
         <dd>
           <span>{{ zone.amount2 }}</span>
         </dd>
-        <dt><span>Amount 3</span></dt>
+        <dt><span>القيمة 3</span></dt>
         <dd>
           <span>{{ zone.amount3 }}</span>
         </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span>
       </button>
 
       <button type="button" [routerLink]="['/zone', zone.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>تعديل</span>
       </button>
     </div>
   </div>

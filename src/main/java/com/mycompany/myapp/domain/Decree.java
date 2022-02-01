@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 /**
  * A Decree.
@@ -94,6 +94,10 @@ public class Decree implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "decreees" }, allowSetters = true)
     private DecreeIssue proponent;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "zone" }, allowSetters = true)
+    private Country country;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -366,6 +370,19 @@ public class Decree implements Serializable {
 
     public Decree proponent(DecreeIssue decreeIssue) {
         this.setProponent(decreeIssue);
+        return this;
+    }
+
+    public Country getCountry() {
+        return this.country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public Decree country(Country country) {
+        this.setCountry(country);
         return this;
     }
 

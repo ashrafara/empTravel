@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <!--
         Added the entity Decree.
@@ -31,39 +33,42 @@
                 <constraints nullable="true" />
             </column>
             <column name="countrty" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" />
             </column>
             <column name="start_date" type="date">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="end_date" type="date">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="area" type="varchar(255)">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="cost" type="varchar(255)">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="decreecost" type="varchar(255)">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="image_url" type="varchar(255)">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="image" type="longblob">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="image_content_type" type="varchar(255)">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="decreeissue_id" type="bigint">
-                <constraints nullable="true"/>
+                <constraints nullable="true" />
             </column>
             <column name="sponsor_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <column name="proponent_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="country_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

@@ -24,6 +24,8 @@
     <include file="config/liquibase/changelog/20211104211059_added_entity_Degree.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220131161341_added_entity_Zone.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220131161732_added_entity_Country.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211104211055_added_entity_Employee.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211104211058_added_entity_DecreeIssue.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20211104211055_added_entity_constraints_Employee.xml"
              relativeToChangelogFile="false"/>
@@ -33,6 +35,10 @@
              relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220131161732_added_entity_constraints_Country.xml"
              relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211104211055_added_entity_constraints_Employee.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211104211056_added_entity_constraints_Sector.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20211104211057_added_entity_constraints_Decree.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220131161732_added_entity_constraints_Country.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

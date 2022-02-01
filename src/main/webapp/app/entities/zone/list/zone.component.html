@@ -1,13 +1,8 @@
-<div>
+<div class="entity-container">
   <h2 id="page-heading" data-cy="ZoneHeading">
-    <span>Zones</span>
+    <span>المناطق</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>Refresh List</span>
-      </button>
-
       <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
@@ -15,7 +10,7 @@
         [routerLink]="['/zone/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span> Create a new Zone </span>
+        <span> اضافة </span>
       </button>
     </div>
   </h2>
@@ -32,11 +27,11 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr>
-          <th scope="col"><span>ID</span></th>
-          <th scope="col"><span>Name</span></th>
-          <th scope="col"><span>Amount 1</span></th>
-          <th scope="col"><span>Amount 2</span></th>
-          <th scope="col"><span>Amount 3</span></th>
+          <th scope="col"><span>ر.م</span></th>
+          <th scope="col"><span>اسم المنطقة</span></th>
+          <th scope="col"><span>القيمة 1</span></th>
+          <th scope="col"><span>القيمة 2</span></th>
+          <th scope="col"><span>القيمة 3</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -50,20 +45,25 @@
           <td>{{ zone.amount2 }}</td>
           <td>{{ zone.amount3 }}</td>
           <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/zone', zone.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">View</span>
-              </button>
+            <div class="btn-group flex-btn-group-container">
+              <mat-menu #appMenu="matMenu">
+                <button [routerLink]="['./', zone.id, 'view']" mat-menu-item>
+                  <mat-icon>remove_red_eye</mat-icon>
+                  عرض
+                </button>
 
-              <button type="submit" [routerLink]="['/zone', zone.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Edit</span>
-              </button>
+                <button [routerLink]="['./', zone.id, 'edit']" mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  تعديل
+                </button>
+                <button (click)="delete(zone)" mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  حذف
+                </button>
+              </mat-menu>
 
-              <button type="submit" (click)="delete(zone)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Delete</span>
+              <button [matMenuTriggerFor]="appMenu" class="mr-2" mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
               </button>
             </div>
           </td>
