@@ -4,6 +4,7 @@ import com.mycompany.myapp.domain.Decree;
 import com.mycompany.myapp.domain.Employee;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -112,4 +113,8 @@ public interface DecreeRepository extends JpaRepository<Decree, Long> {
         "        ORDER BY employee.name;"
     )
     List<Object[]> findAllEmployeeReport();
+
+    Page<Decree> findAllByCountryNameContainsOrPurposeContains(String country_name, String purpose, Pageable pageable);
+
+    Page<Decree> findAllByDecreenumEqualsOrDecreeyearEquals(@NotNull Integer decreenum, @NotNull Integer decreeyear, Pageable pageable);
 }

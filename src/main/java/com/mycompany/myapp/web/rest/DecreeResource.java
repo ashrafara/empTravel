@@ -219,18 +219,20 @@ public class DecreeResource {
      * {@code GET  /decrees} : get all the decrees.
      *
      * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of decrees in body.
      */
     @GetMapping("/decrees")
-    public ResponseEntity<List<Decree>> getAllDecrees(
-        Pageable pageable,
-        @RequestParam(required = false, defaultValue = "false") boolean eagerload
-    ) {
+    public ResponseEntity<List<Decree>> getAllDecrees(Pageable pageable, String query) {
         log.debug("REST request to get a page of Decrees");
         Page<Decree> page;
-        if (eagerload) {
-            page = decreeRepository.findAllWithEagerRelationships(pageable);
+        if (query != null) {
+            try {
+                Integer.parseInt(query);
+                page =
+                    decreeRepository.findAllByDecreenumEqualsOrDecreeyearEquals(Integer.parseInt(query), Integer.parseInt(query), pageable);
+            } catch (Exception e) {
+                page = decreeRepository.findAllByCountryNameContainsOrPurposeContains(query, query, pageable);
+            }
         } else {
             page = decreeRepository.findAll(pageable);
         }
