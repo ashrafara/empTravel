@@ -60,8 +60,7 @@
           <label class="form-control-label" for="field_daynum">عدد الايام</label>
           <input type="number" class="form-control" name="daynum" id="field_daynum" data-cy="daynum" formControlName="daynum" />
           <div *ngIf="editForm.get('daynum')!.invalid && (editForm.get('daynum')!.dirty || editForm.get('daynum')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('daynum')?.errors?.required"> This field is required. </small>
-            <small class="form-text text-danger" [hidden]="!editForm.get('daynum')?.errors?.number"> البيانات مطلوبة. </small>
+            <small class="form-text text-danger" *ngIf="editForm.get('daynum')?.errors?.required"> البيانات مطلوبة. </small>
           </div>
         </div>
 
@@ -69,14 +68,6 @@
           <label class="form-control-label" for="field_city">ملاحظات</label>
           <input type="text" class="form-control" name="city" id="field_city" data-cy="city" formControlName="city" />
         </div>
-
-        <!--        <div class="form-group">-->
-        <!--          <label class="form-control-label" for="field_countrty">البلد</label>-->
-        <!--          <input type="text" class="form-control" name="countrty" id="field_countrty" data-cy="countrty" formControlName="countrty" />-->
-        <!--          <div *ngIf="editForm.get('countrty')!.invalid && (editForm.get('countrty')!.dirty || editForm.get('countrty')!.touched)">-->
-        <!--            <small class="form-text text-danger" *ngIf="editForm.get('countrty')?.errors?.required"> البيانات مطلوبة. </small>-->
-        <!--          </div>-->
-        <!--        </div>-->
 
         <div class="form-group">
           <label class="form-control-label" for="field_startDate">تاريخ البداية</label>
@@ -172,8 +163,15 @@
         </div>
 
         <div class="form-group">
-          <label>الموظفين</label>
+          <label class="form-control-label" for="field_countrty">عدد الموظفين</label>
+          <input type="text" class="form-control" name="countrty" id="field_countrty" data-cy="countrty" formControlName="countrty" />
+          <div *ngIf="editForm.get('countrty')!.invalid && (editForm.get('countrty')!.dirty || editForm.get('countrty')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('countrty')?.errors?.required"> البيانات مطلوبة. </small>
+          </div>
+        </div>
 
+        <div class="form-group">
+          <label>اسماء الموظفين</label>
           <ngx-select
             [allowClear]="true"
             [formControl]="selectControl"
@@ -205,7 +203,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_sponsor">الجهة الممــولة</label>
+          <label class="form-control-label" for="field_sponsor">الجهة التى تتحمل المصاريف</label>
           <select class="form-control" id="field_sponsor" data-cy="sponsor" name="sponsor" formControlName="sponsor">
             <option [ngValue]="null"></option>
             <option
@@ -222,7 +220,6 @@
           <select class="form-control" id="field_proponent" data-cy="proponent" name="proponent" formControlName="proponent">
             <option [ngValue]="null"></option>
             Angular Data Grid: Set Filter - Overview
-
             <option
               [ngValue]="
                 decreeIssueOption.id === editForm.get('proponent')!.value?.id ? editForm.get('proponent')!.value : decreeIssueOption

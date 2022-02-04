@@ -26,7 +26,7 @@
         <dd>
           <span>{{ sector.address }}</span>
         </dd>
-        <dt><span>القطاع التابع له</span></dt>
+        <dt><span>الجهة التابع له</span></dt>
         <dd>
           <div *ngIf="sector.sector">
             <a [routerLink]="['/sector', sector.sector?.id, 'view']">{{ sector.sector?.name }}</a>

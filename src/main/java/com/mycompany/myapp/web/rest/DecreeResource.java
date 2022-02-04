@@ -1,6 +1,7 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Decree;
+import com.mycompany.myapp.domain.Employee;
 import com.mycompany.myapp.repository.DecreeRepository;
 import com.mycompany.myapp.service.utl.FileTools;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
@@ -509,6 +510,72 @@ public class DecreeResource {
             row.createCell(0).setCellValue(object[0].toString());
             row.createCell(1).setCellValue(object[1].toString());
             row.createCell(2).setCellValue(object[2].toString());
+        }
+        for (int i = 0; i < columns.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+        byte[] bytes = new byte[0];
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            workbook.write(bos);
+            bos.close();
+            bytes = bos.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.valueOf("application/vnd.ms-excel"));
+        header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + new Date() + ".xlsx");
+        header.setContentLength(bytes.length);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bytes), header);
+    }
+
+    @GetMapping(value = "/public/decrees/employee-report/xlsx", produces = "application/vnd.ms-excel")
+    public ResponseEntity<byte[]> employeeReportAsXSLX() {
+        List<Object[]> data = decreeRepository.findAllEmployeeReport();
+        String[] columns = {
+            "ر.م",
+            "عدد الايام",
+            " اسم الموظف",
+            "الادارة",
+            "الوظيفة",
+            "بلد الايفاد",
+            "الدرجة",
+            "رقم القرار",
+            "المنطقة",
+            "الدرجة1-6",
+            "الدرجة7-11",
+            "فوق 12",
+        };
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Companies");
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerFont.setFontHeightInPoints((short) 14);
+        headerFont.setColor(IndexedColors.BLACK.getIndex());
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFont(headerFont);
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < columns.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns[i]);
+            cell.setCellStyle(headerCellStyle);
+        }
+        int rowNum = 1;
+        for (Object[] object : data) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(object[0].toString());
+            row.createCell(1).setCellValue(object[1] == null ? "" : object[1].toString());
+            row.createCell(2).setCellValue(object[2] == null ? "" : object[2].toString());
+            row.createCell(3).setCellValue(object[3] == null ? "" : object[3].toString());
+            row.createCell(4).setCellValue(object[4] == null ? "" : object[4].toString());
+            row.createCell(5).setCellValue(object[5] == null ? "" : object[5].toString());
+            row.createCell(6).setCellValue(object[6] == null ? "" : object[6].toString());
+            row.createCell(7).setCellValue(object[7] == null ? "" : object[7].toString());
+            row.createCell(8).setCellValue(object[8] == null ? "" : object[8].toString());
+            row.createCell(9).setCellValue(object[9] == null ? "" : object[9].toString());
+            row.createCell(10).setCellValue(object[10] == null ? "" : object[10].toString());
+            row.createCell(11).setCellValue(object[11] == null ? "" : object[11].toString());
         }
         for (int i = 0; i < columns.length; i++) {
             sheet.autoSizeColumn(i);

@@ -1,6 +1,7 @@
 package com.mycompany.myapp.repository;
 
 import com.mycompany.myapp.domain.Decree;
+import com.mycompany.myapp.domain.Employee;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -95,4 +96,20 @@ public interface DecreeRepository extends JpaRepository<Decree, Long> {
         "order by dayCount desc;\n"
     )
     List<Object[]> findAllCountCountrydayemployee();
+
+    @Query(
+        nativeQuery = true,
+        value = " select  decree.id, decree.daynum, employee.name as 'employeeename',employee.departement ,employee.jobposition," +
+        "country.name as 'countryname', degree.name as 'degreename'," +
+        " decree.decreenum, zone.name as 'zonename', zone.amount_1, zone.amount_2, zone.amount_3\n" +
+        "        from decree, rel_decree__employee, employee, country, degree, zone\n" +
+        "        wHERE decree.id = rel_decree__employee.decree_id\n" +
+        "        and employee.id = rel_decree__employee.employee_id\n" +
+        "        AND country.id = decree.country_id \n" +
+        "        AND degree.id = employee.degree_id \n" +
+        "        AND zone.id = country.zone_id \n" +
+        "        and decreeyear=2021\n" +
+        "        ORDER BY employee.name;"
+    )
+    List<Object[]> findAllEmployeeReport();
 }

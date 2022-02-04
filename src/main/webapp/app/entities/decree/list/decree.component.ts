@@ -10,6 +10,7 @@ import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants
 import { DecreeService } from '../service/decree.service';
 import { DecreeDeleteDialogComponent } from '../delete/decree-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { IEmployee } from '../../employee/employee.model';
 
 @Component({
   selector: 'jhi-decree',
@@ -24,6 +25,7 @@ export class DecreeComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  currentSearch: any;
 
   constructor(
     protected decreeService: DecreeService,
@@ -109,6 +111,31 @@ export class DecreeComponent implements OnInit {
   printCtryDayReport(): void {
     const url = '/api/public/decrees/count-country-day-emp/xlsx';
     window.open(url, '_blank');
+  }
+
+  printEmployeeDayReport(): void {
+    const url = '/api/public/decrees/employee-report/xlsx';
+    window.open(url, '_blank');
+  }
+
+  search(currentSearch: any): void {
+    this.decreeService
+      .query({
+        query: currentSearch,
+        page: 0,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      })
+      .subscribe(
+        (res: HttpResponse<IDecree[]>) => {
+          this.isLoading = false;
+          this.decrees = res.body ?? [];
+        },
+        () => {
+          this.isLoading = false;
+          this.onError();
+        }
+      );
   }
 
   protected sort(): string[] {
