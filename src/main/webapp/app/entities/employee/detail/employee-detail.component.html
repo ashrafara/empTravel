@@ -44,6 +44,66 @@
         </dd>
       </dl>
 
+      <div class="table-responsive" id="entities" *ngIf="employee.decrees && employee.decrees.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+          <thead>
+            <tr>
+              <th scope="col">
+                <span>ر.م</span>
+              </th>
+              <th scope="col">
+                <span>رقم القرار</span>
+              </th>
+              <th scope="col">
+                <span>السنة</span>
+              </th>
+              <th scope="col">
+                <span>الغرض</span>
+              </th>
+              <th scope="col">
+                <span>النوع</span>
+              </th>
+              <th scope="col">
+                <span>عدد الايام</span>
+              </th>
+              <th scope="col">
+                <span>البلد</span>
+              </th>
+              <th scope="col">
+                <span>صورة</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let decree of employee.decrees" data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/decree', decree.id, 'view']">{{ decree.id }}</a>
+              </td>
+              <td>{{ decree.decreenum }}</td>
+              <td>{{ decree.decreeyear }}</td>
+              <td>{{ decree.purpose }}</td>
+              <td>{{ decree.dectype | translateMe }}</td>
+              <td>{{ decree.daynum }}</td>
+              <td>{{ decree.country?.name }}</td>
+              <td>
+                <button color="primary" mat-raised-button id="jh-create-entity">
+                  <span class="hidden-sm-down">عرض الملف</span>
+                </button>
+              </td>
+              <td class="text-right">
+                <div class="btn-group flex-btn-group-container">
+                  <mat-menu #appMenu="matMenu"> </mat-menu>
+
+                  <button [matMenuTriggerFor]="appMenu" class="mr-2" mat-icon-button>
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>للخلف</span>
       </button>

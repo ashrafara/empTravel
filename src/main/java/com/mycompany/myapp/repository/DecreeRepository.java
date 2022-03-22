@@ -4,6 +4,7 @@ import com.mycompany.myapp.domain.Decree;
 import com.mycompany.myapp.domain.Employee;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

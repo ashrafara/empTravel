@@ -186,7 +186,7 @@ public class EmployeeResource {
     @GetMapping("/employees/{id}")
     public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
         log.debug("REST request to get Employee : {}", id);
-        Optional<Employee> employee = employeeRepository.findById(id);
+        Optional<Employee> employee = employeeRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(employee);
     }
 
